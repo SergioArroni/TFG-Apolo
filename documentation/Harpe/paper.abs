@@ -1,0 +1,13 @@
+With the increasing reliance on \textit{Software-Defined Perimeters} (\textit{SDPs}) for network security, it
+        is important to understand the limitations and vulnerabilities of this architecture.
+        This paper proposes a framework, \textit{Harpe}, that generates attacks on \textit{SDP}-based networks to
+        demonstrate the potential weaknesses of this architecture.
+        \textit{Harpe} generates malicious network traffic that mimics normal traffic to evade the
+        \textit{Intrusion Detection System} (\textit{IDS}) component of \textit{SDPs}.
+        Utilizing \textit{Adversarial Machine Learning} techniques, it learns how the \textit{IDS} operates and finds
+        ways to evade detection.
+        The effectiveness of the proposed framework is tested in two different environments, a traditional network
+        architecture and an \textit{SDP}-based network.
+        The results show that \textit{Harpe} is capable of significantly reducing the detection capabilities of the
+        \textit{IDS} in both environments, highlighting the need for further research and improvement of \textit{SDP}
+        security mechanisms.

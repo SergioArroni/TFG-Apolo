@@ -1,0 +1,81 @@
+version: '3.7'
+
+services:
+
+  # ==================> WordPress <====================
+  wordpress:
+    image: wordpress:latest
+    container_name: wordpress
+    restart: always
+    ports:
+      - 8080:80
+    volumes:
+      - ./wordpress:/var/www/html
+    environment:
+      WORDPRESS_DB_HOST: wordpress_db
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+    depends_on:
+      - wordpress_db
+    networks:
+      - example-app-network
+
+  # ==================> MySQL <====================
+  wordpress_db:
+    image: mysql:5.7
+    container_name: wordpress_db
+    restart: always
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: wordpress
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+    networks:
+      - example-app-network
+
+  # ==================> phpMyAdmin <====================
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    ports:
+      - 8081:80
+    environment:
+      PMA_HOST: wordpress_db
+      PMA_USER: wordpress
+      PMA_PASSWORD: wordpress
+      PMA_ARBITRARY: 1
+    depends_on:
+      - wordpress_db
+    networks:
+      - example-app-network
+
+  # ==================> CIC FlowMeter <====================
+  cicflowmeter:
+    build:
+      context: ./cicflowmeter
+      dockerfile: Dockerfile
+    container_name: cicflowmeter
+    restart: always
+    volumes:
+      - ./data/cicflowmeter/pcap:/pcap
+      - ./data/cicflowmeter/flow:/flow
+    command: /pcap /flow
+    networks:
+      - example-app-network
+
+  # ==================> P-CAP Capture <====================
+  tcpdump:
+    image: nicolaka/netshoot
+    depends_on:
+      - wordpress
+    command: tcpdump -i eth0 -w /data/wordpress.pcap
+    network_mode: service:wordpress
+    volumes:
+      - ./data/cicflowmeter/pcap:/data
+
+networks:
+  example-app-network:

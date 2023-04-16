@@ -1,0 +1,114 @@
+version: '3.7'
+services:
+
+  # ============================================ NGINX API GATEWAY ============================================
+  api-gateway:
+    container_name: api-gateway
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+    volumes:
+      - ./data/gateway/logs:/var/log/nginx
+    networks:
+      - tfg
+  
+  # ============================================ SIMULATED WEBAPP & APIS ============================================
+  webapp:
+    container_name: webapp
+    image: nginx:alpine
+    ports:
+      - 8080:80
+    volumes:
+      - ./webapp:/usr/share/nginx/html
+    networks:
+      - tfg
+
+  # ============================================ INTRUSION DETECTION SYSTEM ============================================
+  redis:
+    container_name: redis
+    image: redis:alpine
+    volumes:
+      - ./data/redis:/data
+    ports:
+      - 6379:6379
+    networks:
+      - tfg
+
+  redisinsight:
+    container_name: redisinsight
+    image: redislabs/redisinsight:latest
+    ports:
+      - 8001:8001
+    networks:
+      - tfg
+
+  influxdb:
+    container_name: influxdb
+    image: influxdb:latest
+    volumes:
+      - ./data/influxdb:/var/lib/influxdb
+    ports:
+      - 8086:8086
+    environment:
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_ORG=uniovi
+      - DOCKER_INFLUXDB_INIT_USERNAME=${INFLUXDB_USERNAME}
+      - DOCKER_INFLUXDB_INIT_PASSWORD=${INFLUXDB_PASSWORD}
+      - DOCKER_INFLUXDB_INIT_BUCKET=requests_scores
+      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=${INFLUXDB_TOKEN}
+
+    networks:
+      - tfg
+
+  # ============================================ ELK STACK -  MONITORING LOGS ============================================
+
+  filebeat:
+    container_name: filebeat
+    image: docker.elastic.co/beats/filebeat:7.6.2
+    entrypoint: "filebeat -e -strict.perms=false"
+    volumes:
+      - ./elk/filebeat.yml:/usr/share/filebeat/filebeat.yml
+      - ./data/gateway/logs:/var/log/nginx
+    networks:
+      - tfg
+
+  logstash:
+    container_name: logstash
+    image: docker.elastic.co/logstash/logstash:7.6.2
+    volumes:
+      - ./elk/logstash.yml:/usr/share/logstash/config/logstash.yml
+      - ./elk/pipeline:/usr/share/logstash/pipeline
+    ports:
+      - "5000:5000"
+      - "9600:9600"
+    expose: 
+      - "5044"
+    networks:
+      - tfg
+
+  elasticsearch:
+    container_name: elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.6.2
+    volumes:
+      - ./elk/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - ./data/elasticsearch:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    networks:
+      - tfg
+
+  kibana:
+    container_name: kibana
+    image: docker.elastic.co/kibana/kibana:7.6.2
+    volumes:
+      - ./elk/kibana.yml:/usr/share/kibana/config/kibana.yml
+    ports:
+      - "5601:5601"
+    networks:
+      - tfg
+    
+networks:
+  tfg: {}

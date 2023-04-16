@@ -1,0 +1,78 @@
+%TODO: Introduction
+
+The rise of modern cyberattacks has highlighted the inadequacies of traditional network security
+methods~\cite{al2021cyber, bubukayr2021cybersecurity}.
+With the increasing adoption of \textit{cloud computing}, \textit{mobile devices}, and the
+\textit{Internet of Things (IoT)}, traditional perimeter-based security models have become increasingly porous and
+difficult to maintain~\cite{karimi2021software, palmo2021complementary}.
+This has led to a growing need for more dynamic and flexible security solutions that can adapt to the constantly
+changing threat landscape.
+\textit{Software-Defined Perimeters (SDPs)} have emerged as a promising solution to this problem, as they aim to
+provide a more secure way to protect against modern cyberattacks by creating a \textit{Zero Trust}~\cite{syed2022zero}
+network environment.
+This means that access is granted only to authorized users and devices, and all network traffic is continuously
+monitored and analyzed for suspicious activity.
+This approach helps to prevent unauthorized access to sensitive data and resources, and minimizes the risk of a
+successful cyber attack.
+Additionally, \textit{SDPs} allow for a more dynamic and flexible approach to network security, as they can easily
+adapt to changes in the threat landscape and new technologies~\cite{moubayed2019software}.
+
+To ensure the security of the infrastructure, \textit{SDPs} must be able to detect intrusions and attacks in real time.
+This task is performed by \textit{Intrusion Detection Systems (IDSs)}, which have become an integral part of
+several software infrastructures, as they are responsible for detecting and alerting on suspicious or malicious activity
+within a network or system.
+\textit{IDSs} can be based on various technologies, such as signature-based approaches, anomaly-based approaches, and
+rule-based approaches.
+New classification techniques based on \textit{Machine Learning} have led to significant improvements in the efficiency
+and accuracy of \textit{IDSs}~\cite{khraisat2019survey}.
+
+However, \textit{IDSs} are not immune to attacks, and one increasingly common and sophisticated type of attacks are
+those using \textit{Adversarial Machine Learning (AML)}~\cite{huang2011adversarial} techniques.
+These attacks are a particularly dangerous type of attack for \textit{IDSs} because they involve the manipulation of
+\textit{Machine Learning} models through the injection of malicious or misleading data.
+This can be achieved through a variety of methods, such as the use of carefully crafted data samples known as
+adversarial examples, or the modification of model parameters through techniques such as \textit{gradient descent} or
+\textit{gradient-based} optimization~\cite{chen2017distributed}.
+
+The goal of \textit{AML} attacks is to cause the \textit{Machine Learning} to make incorrect decisions, which could
+potentially be used to evade detection or cause false alarms in the context of an \textit{IDS}.
+\textit{AML} attacks are particularly dangerous because they can be difficult to detect and defend against, as they
+often involve subtle changes to data that are not easily noticeable to humans.
+
+In the context of \textit{SDPs}, \textit{IDSs} are more effective due to the small number of connections and requests
+allowed.
+The \textit{Zero Trust} security model and the \textit{SDP} architecture  greatly reduces the number of connections and
+requests that the \textit{IDS} has to monitor, as it only needs to focus on the small number of connections that
+tries to authenticate with the \textit{SDP}.
+This reduction in the type of traffic allowed makes it more difficult to create attacks using \textit{AML} techniques,
+making attacks that generated random noise unfeasible.
+However, this increased difficulty does not make \textit{SDP}-based network architectures completely invulnerable.
+
+In this paper, we introduce a new attack framework called \textit{Harpe}, which targets \textit{IDSs} in
+\textit{SDP}-based networks.
+\textit{Harpe} aims to show that \textit{SDP} network architecture is not immune to current cyber threats,
+highlighting the need for additional research and enhancement of SDP security measures.
+\textit{Harpe} is designed to bypass the security measures of \textit{SDPs}, by generating attacks that mimic normal
+network traffic.
+The goal of \textit{Harpe} is to evade detection by the \textit{IDS}, allowing an attacker to make unauthorized
+requests to the \textit{SDP} and, potentially gain access to sensitive data or make denial-of-service attacks.
+
+One of the key features of \textit{Harpe} is its use of a \textit{Wasserstein Generative Adversarial Network (WGAN)}
+with \textit{Gradient Penalty}~\cite{gulrajani2017improved} (a variant of the
+\textit{Generative Adversarial Network (GAN)}~\cite{goodfellow2020generative}) to generate malicious inputs that can
+fool the \textit{IDS} into thinking they are normal network traffic.
+This allows \textit{Harpe} to generate highly targeted attacks that are specific to the characteristics of the
+\textit{SDP's IDS}.
+
+To test \textit{Harpe}, we used the open source implementation of \textit{SDP} from Waverley
+Labs~\footnote{https://www.waverleylabs.com}, and integrated an \textit{IDS} with some of the most commonly used
+classifiers.
+
+The structure of the paper is as follows.
+In Section~\ref{sec:background} we present the background information necessary to understand the rest of the paper,
+including a description of \textit{SDPs}, \textit{IDSs}, and \textit{AML} attacks.
+In Section~\ref{sec:related-work} we present the related \textit{IDS} classification techniques and \textit{AML}
+attacks.
+Section~\ref{sec:proposal} presents \textit{Harpe} and its implementation, Section~\ref{sec:evaluation} presents the
+evaluation of our attack method, and, finally, Section~\ref{sec:conclusions-and-future-work} presents our conclusions
+and future work.

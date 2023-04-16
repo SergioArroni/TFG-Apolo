@@ -1,0 +1,114 @@
+%\documentclass[a4paper,fleqn,longmktitle]{cas-dc}
+\documentclass[a4paper,fleqn]{cas-dc}
+
+%\usepackage[authoryear,longnamesfirst]{natbib}
+%\usepackage[authoryear]{natbib}
+\usepackage[numbers]{natbib}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{tabularx}
+\usepackage{wrapfig}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\renewcommand{\arraystretch}{2}
+\usepackage{float}
+
+\begin{document}
+
+    \shorttitle{Apollon: A Robust Defence System against Adversarial Machine Learning Attacks in Intrusion Detection Systems}
+    \shortauthors{Antonio Paya, Sergio Arroni, Vicente García and Alberto Gómez}
+
+% ============================== TITLE
+    \title [mode = title]{Apollon: A Robust Defence System against Adversarial Machine Learning Attacks in Intrusion Detection Systems}
+
+
+% ============================== AUTHORS
+    \author[uniovi]{Antonio Paya}[orcid=0000-0003-3733-3805]\ead{antoniopaya@outlook.com}\cormark[1]
+
+    \author[uniovi]{Sergio Arroni}[orcid=0000-0002-4907-8576]\ead{sergioarroni@outlook.com}
+
+    \author[uniovi]{Vicente García-Díaz}[orcid=0000-0003-2037-8548]\ead{garciavicente@uniovi.es}
+
+    \author[epi]{Alberto Gómez}[orcid=0000-0003-2037-8548]\ead{albertogomez@uniovi.es}
+
+    \address[uniovi]{Department of Computer Science,
+        University of Oviedo, Science Faculty, Oviedo, Spain}
+    \address[epi]{Department of Business Administration, University of Oviedo, Gijón, Spain}
+
+    \cortext[cor1]{Corresponding author}
+% ============================== ABSTRACT
+    \begin{abstract}
+        The growing threat of Adversarial Machine Learning (AML) attacks is posing a significant
+        challenge for the effectiveness of Intrusion Detection Systems (IDS).
+        In this paper, we propose \textit{Apollon}, a novel defence system that can protect IDS against
+        AML evasion and extraction attacks.
+        \textit{Apollon} leverages a set of heterogeneous classifiers to detect intrusions and applies a
+        \textit{Multi-Armed Bandits (MAB)} model to dynamically select the optimal classifier or ensemble of classifiers
+        for each input.
+        Therefore, \textit{Apollon} can prevent attackers from learning the IDS behaviour and generating
+        adversarial examples that can evade the IDS detection.
+        We evaluate \textit{Apollon} on several of the most popular and recent datasets, and show that it can successfully
+        detect attacks without compromising its performance on normal inputs.
+        We also demonstrate that \textit{Apollon} can prevent attackers from learning the IDS behaviour in realistic
+        training times.
+        Our results suggest that \textit{Apollon} is an effective and efficient defence system against AML attacks in IDS.
+    \end{abstract}
+
+% ============================== KEYWORDS
+    \begin{keywords}
+        Adversarial Machine Learning \sep Intrusion Detection Systems \sep Artificial Intelligence \sep Cybersecurity
+        \sep Multi-Armed Bandits
+    \end{keywords}
+
+
+    \maketitle
+
+%% main text
+%% ============================================================ I. Introduction
+
+
+    \section{Introduction}\label{sec:introduction}
+    \input{Sections/01-introduction}
+
+%% ============================================================ I. Background
+
+
+    \section{Background}\label{sec:background}
+    \input{Sections/02-background}
+
+%% ============================================================ III. Related Work
+
+
+    \section{Related Work}\label{sec:related-work}
+    \input{Sections/03-related-work}
+    
+
+%% ============================================================ IV. Proposal
+
+
+    \section{Apollon}\label{sec:proposal}
+    \input{Sections/04-proposal}
+
+%% ============================================================ V. Evaluation
+
+
+    \section{Evaluation}\label{sec:evaluation}
+    \input{Sections/05-evaluation}
+
+%% ============================================================ VI. Conclusions and Future Work
+
+
+    \section{Conclusions and Future Work}\label{sec:conclusions-and-future-work}
+    \input{Sections/06-conclusions_and_future_work}
+
+%% ============================================================ XI. References
+
+%% Loading bibliography
+    \bibliographystyle{ieeetr}
+    \bibliography{references}
+
+
+
+%\vskip3pt
+
+\end{document}
