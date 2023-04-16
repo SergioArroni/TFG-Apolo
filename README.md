@@ -1,3 +1,7 @@
+
+[![Actions Status](https://github.com/SergioArroni/TFG-Apolo/workflows/CI/badge.svg)](https://github.com/SergioArroni/TFG-Apolo/actions)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=SergioArroni_TFG-Apoloc&metric=alert_status)](https://sonarcloud.io/project/overview?id=SergioArroni_TFG-Apolo)
+
 # **Apolo**: Sistema inteligente de monitorización  y detección de ataques basados en inteligencia artificial
 
 ## Descripción
