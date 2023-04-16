@@ -8,7 +8,7 @@ Diseño de un sistema inteligente que, mediante el uso de técnicas de Machine L
 * **Tutor:** Antonio Payá González
 * **Tutor:** Vicente García Díaz
 
-![Apolo](documentation/memoru/Figures/Apolo.png)
+![Apolo](documentation/memory/Figures/Apolo.png)
 
 ## Estrucutra del proyecto
 
