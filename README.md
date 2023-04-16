@@ -1,4 +1,4 @@
-# **Aquiles**: Sistema inteligente de monitorización  y detección de ataques basados en inteligencia artificial
+# **Apolo**: Sistema inteligente de monitorización  y detección de ataques basados en inteligencia artificial
 
 ## Descripción
 
@@ -8,7 +8,7 @@ Diseño de un sistema inteligente que, mediante el uso de técnicas de Machine L
 * **Tutor:** Antonio Payá González
 * **Tutor:** Vicente García Díaz
 
-![Apolo](documentation/Figures/Apolo.png)
+![Apolo](documentation/memoru/Figures/Apolo.png)
 
 ## Estrucutra del proyecto
 
