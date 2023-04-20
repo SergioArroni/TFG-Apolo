@@ -1,8 +1,9 @@
 filebeat.inputs:
-- type: log
-  enabled: true
+- type: filestream
+  id: gateway-filestream
+  exclude_lines: ['^Flow']
   paths:
-    - /var/log/nginx/access.log
+    - /var/log/gateway/api-gateway.pcap_Flow.csv
 
 output.logstash:
   enabled: true
@@ -10,5 +11,5 @@ output.logstash:
   
 setup.kibana:
   host: "http://kibana:5601"
-  username: "admin"
-  password: "HijosDeSanPedro"
+  username: ${ELK_USERNAME}
+  password: ${ELK_PASSWORD}
