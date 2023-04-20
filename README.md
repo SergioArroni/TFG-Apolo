@@ -1,4 +1,8 @@
-# **Aquiles**: Sistema inteligente de monitorización  y detección de ataques basados en inteligencia artificial
+
+[![Actions Status](https://github.com/SergioArroni/TFG-Apolo/workflows/CI/badge.svg)](https://github.com/SergioArroni/TFG-Apolo/actions)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=SergioArroni_TFG-Apolo&metric=alert_status)](https://sonarcloud.io/project/overview?id=SergioArroni_TFG-Apolo)
+
+# **Apolo**: Sistema inteligente de monitorización  y detección de ataques basados en inteligencia artificial
 
 ## Descripción
 
@@ -8,7 +12,7 @@ Diseño de un sistema inteligente que, mediante el uso de técnicas de Machine L
 * **Tutor:** Antonio Payá González
 * **Tutor:** Vicente García Díaz
 
-![Aquiles](documentation/Figures/Aquiles.png)
+![Apolo](documentation/memory/Figures/Apolo.png)
 
 ## Estrucutra del proyecto
 
