@@ -1,0 +1,120 @@
+@startuml classes_Apolo
+set namespaceSeparator none
+class "ApoloPredict" as ids.Apolo.model_predict.apolo_classifier.ApoloPredict {
+  {abstract}classify_request(request: object, model: object) -> None
+}
+class "ApoloTrainer" as ids.Apolo.model_train.apolo_trainer.ApoloTrainer {
+  {abstract}test_model(dataset: pd.DataFrame, url: str) -> None
+  {abstract}train_model(model: object, dataset: pd.DataFrame, url: str) -> None
+}
+class "ClearData" as ids.Apolo.preprocesing.clear_data.ClearData {
+  df : NoneType, DataFrame
+  do_log : bool
+  label_f : int
+  log_unic : int
+  max_mediana : int
+  quantile : float
+  save : bool
+  seed : int
+  x : ndarray, NoneType
+  y : NoneType
+  best_features_func() -> None
+  cast_time(label: str, time_format: str) -> None
+  {abstract}clear_data() -> None
+  clear_freq(df_cat: pd.DataFrame) -> None
+  clear_log(df_before: pd.DataFrame, df_numeric: pd.DataFrame) -> pd.DataFrame
+  clear_valores_atipicos(df_numeric: pd.DataFrame) -> pd.DataFrame
+  {abstract}drop_bad_elements() -> None
+  drop_bad_elements_x() -> None
+  drop_duplicate_columns() -> None
+  drop_one_features() -> None
+  {abstract}load_data()
+  loss_data() -> None
+  one_shotear(list_columns: list) -> np.array
+  reduce_tam() -> None
+  replace(list_B_columns: list, list_M_columns: list) -> None
+  {abstract}save_data() -> None
+}
+class "DataCollector" as ids.Apolo.storage.data_collector.DataCollector {
+  dataset : NoneType, TextFileReader
+  last_element
+  get_data_from_queue(redis_db: int, redis_port: int, list_name: str) -> None
+  get_dataset(url: str) -> None
+}
+class "InfluxDBService" as ids.Apolo.services.influxdb_service.InfluxDBService {
+  add_influxdb_data(influxdb_connection: InfluxDBClient, bucket: str, measurement_name: str, value: float, tags: dict) -> None
+  close_influxdb_connection(influxdb_connection: InfluxDBClient) -> None
+  get_influxdb_connection(url: str, token: str, org: str) -> InfluxDBClient
+}
+class "MAB" as ids.Apolo.layers.mab.mab.MAB {
+  alpha : ndarray
+  arms : list
+  beta : ndarray
+  cluster_assignments : NoneType
+  cluster_centers : NoneType
+  kmeans
+  n_arms : int
+  n_clusters : int
+  reward_sums : dict
+  selected_arms : ndarray
+  y_pred : ndarray
+  y_test : ndarray
+  predict(X_test)
+  print_arms_test(name: str)
+  select_arm(cluster)
+  test(df_preprocessed: object, name: str)
+  train(X_train, y_train, X_test, y_test)
+}
+class "Model" as ids.Apolo.layers.models.model.Model {
+  dataset : str
+  model_trained : NoneType
+  predictions : NoneType
+  seed : int
+  time_total : list, NoneType
+  x_test : list
+  x_train : list
+  y_test : list
+  y_train : list
+  exe() -> None
+  {abstract}expecific_model()
+  model_train_test() -> None
+  predict(test_x: list) -> list
+}
+class "RedisService" as ids.Apolo.services.redis_service.RedisService {
+  close_redis_connection(redis_connection: redis.Redis) -> None
+  get_redis_connection(host: str, port: int, db: int) -> redis.Redis
+  get_redis_list(redis_connection: redis.Redis, list_name: str) -> list
+  get_redis_list_last_n_elements(redis_connection: redis.Redis, list_name: str, n: int) -> list
+  get_redis_list_last_n_elements_and_delete_them(redis_connection: redis.Redis, list_name: str, n: int) -> list
+  remove_redis_list_all_elements(redis_connection: redis.Redis, list_name: str) -> None
+  remove_redis_list_last_n_elements(redis_connection: redis.Redis, list_name: str, n: int) -> None
+}
+class "ScoreManager" as ids.Apolo.storage.score_manager.ScoreManager {
+  dataset : NoneType, TextFileReader
+  get_dataset(url: str) -> None
+  push_data_to_influxdb(last_element: list, url: str, org: str) -> None
+}
+class "Transform" as ids.Apolo.preprocesing.transform.Transform {
+  seed : int
+  size : float
+  x : list
+  x_test : NoneType, str, tuple
+  x_train : str, NoneType, tuple
+  y : list
+  y_test : NoneType
+  y_train : NoneType
+  transform() -> None
+}
+class "UtilsLoad" as ids.Apolo.utils.load.UtilsLoad {
+  list_load_dataset : list
+  seed : int
+  load_data(path: list, seed: int) -> pd.DataFrame
+  load_dataset(dataset_type: str, name: str, load_dataset: bool, save: bool) -> object
+  load_model(name: str) -> object
+}
+class "UtilsSave" as ids.Apolo.utils.save.UtilsSave {
+  seed : int
+  save_data(df: pd.DataFrame, name: str) -> None
+  save_model(model, name: str) -> None
+}
+@enduml
