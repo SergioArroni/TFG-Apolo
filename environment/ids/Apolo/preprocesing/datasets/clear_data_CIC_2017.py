@@ -7,17 +7,16 @@
 # ==================> Imports
 
 import pandas as pd
-from preprocesing import ClearData as cd
-
-from sklearn.feature_selection import SelectKBest, chi2
+from apolo.preprocesing import ClearData
 
 
 # ==================> Functions
-class ClearDataCIC2017(cd):
-    """ClearDataCIC2017
-    """
+class ClearDataCIC2017(ClearData):
+    """ClearDataCIC2017"""
 
-    def __init__(self, df: pd.DataFrame, do_save: bool, seed: int, name_save: str, name_load: str) -> None:
+    def __init__(
+        self, df: pd.DataFrame, do_save: bool, seed: int, name_save: str, name_load: str
+    ) -> None:
         """__init__
 
         This method is used to initialize the ClearDataCIC2017 class.
@@ -64,22 +63,19 @@ class ClearDataCIC2017(cd):
             self.save_data()
 
     # Override
-    def save_data(self):
-
+    def save_data(self) -> None:
         aux_df = self.df
         aux_df.drop([" Label"], axis=1, inplace=True)
 
-        aux_y = pd.DataFrame(self.y, columns=[' Label'])
+        aux_y = pd.DataFrame(self.y, columns=[" Label"])
         aux_df = pd.concat([aux_df, aux_y], axis=1)
 
-        aux_df.to_csv(
-            f'./shared/data_prep/CIC17/{self.name_save}.csv', index=False)
+        aux_df.to_csv(f"./shared/data_prep/CIC17/{self.name_save}.csv", index=False)
 
-        aux_y.to_csv(
-            f'./shared/data_prep/CIC17/{self.name_save}_y.csv', index=False)
+        aux_y.to_csv(f"./shared/data_prep/CIC17/{self.name_save}_y.csv", index=False)
 
     # Override
-    def load_data(self):
-        df = pd.read_csv(f'./shared/data_prep/CIC17/{self.name_load}.csv')
-        y = pd.read_csv(f'./shared/data_prep/CIC17/{self.name_load}_y.csv')
+    def load_data(self) -> tuple:
+        df = pd.read_csv(f"./shared/data_prep/CIC17/{self.name_load}.csv")
+        y = pd.read_csv(f"./shared/data_prep/CIC17/{self.name_load}_y.csv")
         return df, y

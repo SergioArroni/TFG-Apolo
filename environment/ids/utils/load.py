@@ -7,10 +7,16 @@
 # ==================> Imports
 import pandas as pd
 import pickle
-from preprocesing import preprocess_dataset
+from apolo.preprocesing import preprocess_dataset
 
 
 class UtilsLoad:
+    """UtilsLoad
+
+    This class is used to load the data and the models.
+
+    """
+
     def __init__(self, seed: int = 42) -> None:
         """__init__
 

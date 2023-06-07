@@ -5,7 +5,7 @@
 # =============================================================================
 
 # ==================> Imports
-from layers.models import Model
+from apolo.layers.models import Model
 
 from sklearn.ensemble import RandomForestClassifier
 
@@ -14,12 +14,12 @@ from sklearn.ensemble import RandomForestClassifier
 class RandomForest(Model):
     def __init__(
         self,
-        x_train: list,
-        y_train: list,
-        x_test: list,
-        y_test: list,
-        dataset: str,
         seed: int,
+        x_train: list = None,
+        y_train: list = None,
+        x_test: list = None,
+        y_test: list = None,
+        dataset: str = None,
         n_estimators: int = 100,
         n_jobs: int = -1,
         exe: bool = True,
@@ -41,15 +41,15 @@ class RandomForest(Model):
         """
         self.n_estimators = n_estimators
         self.n_jobs = n_jobs
-        super().__init__(
-            x_train=x_train,
-            y_train=y_train,
-            x_test=x_test,
-            y_test=y_test,
-            dataset=dataset,
-            seed=seed,
-        )
         if exe:
+            super().__init__(
+                x_train=x_train,
+                y_train=y_train,
+                x_test=x_test,
+                y_test=y_test,
+                dataset=dataset,
+                seed=seed,
+            )
             self.exe()
 
     # Override

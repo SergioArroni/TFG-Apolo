@@ -17,7 +17,7 @@ class Model:
         x_test: list,
         y_test: list,
         dataset: str,
-        seed: int,
+        seed: int = 42,
     ) -> None:
         """__init__
 
@@ -40,7 +40,7 @@ class Model:
         self.y_train = y_train
         self.x_test = x_test
         self.y_test = y_test
-        self.seed = seed = 42
+        self.seed = seed
 
     def exe(self) -> None:
         """exe
@@ -90,10 +90,13 @@ class Model:
             else self.model_trained.predict(test_x)
         )
 
-    def expecific_model(self):
+    def expecific_model(self) -> object:
         """expecific_model
 
         This method right now just passes, but it will be defined by all children of this class and will hold each
         child's specific model.
+
+        Output:
+            object: The model object
         """
         pass

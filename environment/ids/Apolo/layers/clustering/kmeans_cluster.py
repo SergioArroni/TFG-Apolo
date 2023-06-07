@@ -6,19 +6,23 @@
 
 # ==================> Imports
 from sklearn.cluster import KMeans
-from layers.models import Model
+from apolo.layers.models import Model
 
 
 # ==================> Classes
-class KMeans(Model):
+class KMeansCluster(Model):
+    '''KMeansCluster
+    
+    This class is used to create a KMeans model.
+    '''
     def __init__(
         self,
-        x_train: list,
-        y_train: list,
-        x_test: list,
-        y_test: list,
-        dataset: str,
         seed: int,
+        x_train: list = None,
+        y_train: list = None,
+        x_test: list = None,
+        y_test: list = None,
+        dataset: str = None,
         k: int = 2,
         exe: bool = True,
     ) -> None:
@@ -59,6 +63,7 @@ class KMeans(Model):
         """
 
         return KMeans(n_clusters=self.k, random_state=self.seed)
+
     # Override
     def __str__(self) -> str:
         """__str__

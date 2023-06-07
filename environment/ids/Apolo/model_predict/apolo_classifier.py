@@ -5,6 +5,7 @@
 # ================================================================
 
 # ==================> Imports
+from utils import UtilsLoad
 
 
 # ==================> Classes
@@ -19,17 +20,20 @@ class ApoloPredict:
         Output:
             None
         """
-        pass
 
-    def classify_request(self, request: object, model: object) -> None:
+    def classify_request(
+        self, request: object, url: str = "../saved_apolo/Apolo"
+    ) -> int:
         """classify_request
 
         This method is used to classify a request.
 
         Parameters:
             request: Request to classify.
-            model: Model to use for classification.
+            url: URL where the model is saved.
         Output:
-            None
+            Classification result.
         """
-        pass
+        ul = UtilsLoad()
+        
+        return ul.load_model(name = url).predict(request)

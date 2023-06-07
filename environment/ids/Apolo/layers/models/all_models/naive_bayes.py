@@ -5,7 +5,7 @@
 # =============================================================================
 
 # ==================> Imports
-from layers.models import Model
+from apolo.layers.models import Model
 
 from sklearn.naive_bayes import GaussianNB
 
@@ -14,12 +14,12 @@ from sklearn.naive_bayes import GaussianNB
 class NaiveBayes(Model):
     def __init__(
         self,
-        x_train: list,
-        y_train: list,
-        x_test: list,
-        y_test: list,
-        dataset: str,
         seed: int,
+        x_train: list = None,
+        y_train: list = None,
+        x_test: list = None,
+        y_test: list = None,
+        dataset: str = None,
         exe: bool = True,
     ) -> None:
         """__init__

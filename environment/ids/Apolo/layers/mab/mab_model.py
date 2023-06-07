@@ -8,20 +8,34 @@
 import numpy as np
 
 # from datasets import preprocess_dataset, datasets_types
-
 # from scipy.stats import beta as beta_dist
 
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import classification_report
 from sklearn.metrics import f1_score, recall_score, roc_auc_score
 
-from layers.clustering import KMeans
-from layers.models import *
+from apolo.layers.clustering import KMeansCluster
 
 
 # ==================> Classes
 class MAB:
-    def __init__(self, n_arms: int, n_clusters: int = 2, seed: int = 42) -> None:
+    """MAB
+
+    This class is used to implement the Multi-Armed Bandit algorithm.
+
+    Attributes:
+        n_arms (int): number of arms
+        n_clusters (int): number of clusters
+        arms (list): list of arms
+        cluster_centers (list): list of cluster centers
+        cluster_assignments (list): list of cluster assignments
+        reward_sums (dict): dictionary of reward sums
+        alpha (list): list of alpha values
+        beta (list): list of beta values
+        kmeans (object): KMeans object
+    """
+
+    def __init__(self, arms: list, n_clusters: int = 2, seed: int = 42) -> None:
         """__init__
 
         This method is used to initialize the MAB class.
@@ -33,26 +47,33 @@ class MAB:
         Output:
             None
         """
-        self.n_arms = n_arms
         self.n_clusters = n_clusters
-        self.arms = [
-            RandomForest(seed=seed, exe=False),
-            DecisionTree(seed=seed, exe=False),
-            NaiveBayes(seed=seed, exe=False),
-            LogisticRegression(seed=seed, exe=False),
-            MLP(seed=seed, exe=False),
-        ]
+        self.arms = arms
+        self.n_arms = len(self.arms)
         self.cluster_centers = None
         self.cluster_assignments = None
         self.reward_sums = {}
         self.alpha = np.ones(self.n_arms)
         self.beta = np.ones(self.n_arms)
-        self.kmeans = KMeans(n_clusters=self.n_clusters, seed=seed).expecific_model()
+        self.kmeans = KMeansCluster(k=self.n_clusters, seed=seed).expecific_model()
 
         for cluster in range(self.n_clusters):
             self.reward_sums[cluster] = np.zeros(self.n_arms)
 
-    def train(self, X_train, y_train, X_test, y_test):
+    def train(self, X_train: list, y_train: list, X_test: list, y_test: list) -> None:
+        """train
+
+        This method is used to train the MAB.
+
+        Parameters:
+            X_train: Training data.
+            y_train: Training labels.
+            X_test: Testing data.
+            y_test: Testing labels.
+        Output:
+            None
+        """
+
         self.cluster_assignments = self.kmeans.fit_predict(X_train)
         self.cluster_centers = self.kmeans.cluster_centers_
 
@@ -88,8 +109,21 @@ class MAB:
                 if len(arm_X_test) > 0:
                     arm_y_pred = self.arms[arm].predict(arm_X_test)
                     self.reward_sums[i][arm] = np.mean(arm_y_pred == arm_y_test)
+                else:
+                    arm_y_pred = self.arms[arm].predict(X_test)
+                    self.reward_sums[i][arm] = np.mean(arm_y_pred == y_test)
 
-    def select_arm(self, cluster):
+    def select_arm(self, cluster: int) -> int:
+        """select_arm
+
+        This method is used to select an arm.
+
+        Parameters:
+            cluster: Cluster to select the arm from.
+        Output:
+            Selected arm.
+        """
+
         # Select the arm with the highest reward
         theta = np.zeros(self.n_arms)
         for arm in range(self.n_arms):
@@ -97,9 +131,21 @@ class MAB:
                 self.alpha[arm] + self.reward_sums[cluster][arm],
                 self.beta[arm] + 1 - self.reward_sums[cluster][arm],
             )
+
         return np.argmax(theta)
 
-    def predict(self, X_test):
+    def predict(self, X_test: list) -> tuple:
+        """predict
+
+        This method is used to predict the labels of the testing data.
+
+        Parameters:
+            X_test: Testing data.
+        Output:
+            y_pred: Predicted labels.
+            arms: Selected arms.
+        """
+
         # Select the arm for each sample
         arms = np.zeros(len(X_test))
         for i in range(len(X_test)):
@@ -118,7 +164,18 @@ class MAB:
 
         return y_pred, arms
 
-    def test(self, df_preprocessed: object, name: str = "MAB_test.txt"):
+    def test(self, df_preprocessed: object, name: str = "MAB_test.txt") -> None:
+        """test
+
+        This method is used to test the MAB.
+
+        Parameters:
+            df_preprocessed: Preprocessed dataset.
+            name: Name of the file where the results will be saved.
+        Output:
+            None
+        """
+
         # Test the MAB
         self.y_pred, self.selected_arms = self.predict(df_preprocessed.x_test)
 
@@ -146,7 +203,17 @@ class MAB:
         v.write("F1 Score:", f1_score(self.y_test, self.y_pred, average="macro") + "\n")
         v.write("ROC AUC Score:", roc_auc_score(self.y_test, self.y_pred) + "\n")
 
-    def print_arms_test(self, name: str = "ARMS.txt"):
+    def print_arms_test(self, name: str = "ARMS.txt") -> None:
+        """print_arms_test
+
+        This method is used to print the results of the arms.
+
+        Parameters:
+            name: Name of the file where the results will be saved.
+        Output:
+            None
+        """
+
         v = open(name, "a")
         for i in range(self.y_pred.shape[0]):
             v.write(

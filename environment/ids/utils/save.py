@@ -21,7 +21,6 @@ class UtilsSave:
             None
         """
         self.seed = seed
-        pass
 
     def save_model(self, model, name: str) -> None:
         """save_model

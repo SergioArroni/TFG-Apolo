@@ -7,9 +7,7 @@
 # ==================> Imports
 import pandas as pd
 
-from preprocesing import ClearData
-from preprocesing import Transform as transform
-from preprocesing import CIC_2017, CIC_2018, CIC_2019, Data_Our
+from apolo.preprocesing import ClearData, CIC_2017, CIC_2018, CIC_2019, Data_Our, transform
 
 # ===================> Enumerations
 datasets_types = {

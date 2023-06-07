@@ -11,6 +11,14 @@ import redis
 
 
 class RedisService:
+    """RedisService
+
+    This class is used to manage the Redis service.
+
+    Attributes:
+        None
+    """
+
     def __init__(self) -> None:
         """
         Initialize the RedisService class.
@@ -20,7 +28,6 @@ class RedisService:
         Output:
             None
         """
-        pass
 
     # Functions
     def get_redis_connection(self, host: str, port: int, db: int) -> redis.Redis:
@@ -88,7 +95,7 @@ class RedisService:
             Last N elements of the Redis list.
         """
         elements = self.get_redis_list_last_n_elements(
-            self, redis_connection=redis_connection, list_name=list_name, n=n
+            redis_connection=redis_connection, list_name=list_name, n=n
         )
         self.remove_redis_list_last_n_elements(
             redis_connection=redis_connection, list_name=list_name, n=n

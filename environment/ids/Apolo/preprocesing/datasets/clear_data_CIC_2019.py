@@ -4,15 +4,18 @@
 #
 # ===============================================================================
 
-import pandas as pd
 
 # ==================> Imports
-from preprocesing import ClearData as cd
+
+import pandas as pd
+from apolo.preprocesing import ClearData
 
 
 # ==================> Classes
-class ClearDataCIC2019(cd):
-    def __init__(self, df: pd.DataFrame, do_save: bool, seed: int, name_save: str, name_load: str) -> None:
+class ClearDataCIC2019(ClearData):
+    def __init__(
+        self, df: pd.DataFrame, do_save: bool, seed: int, name_save: str, name_load: str
+    ) -> None:
         """__init__
 
         This method is used to initialize the ClearDataCIC2019 class.
@@ -38,8 +41,17 @@ class ClearDataCIC2019(cd):
             None
         """
 
-        list_drop = ['Flow ID', ' Source IP', ' Source Port',
-                     ' Destination IP', ' Destination Port', ' Timestamp', ' Inbound', 'SimillarHTTP', ' Protocol']
+        list_drop = [
+            "Flow ID",
+            " Source IP",
+            " Source Port",
+            " Destination IP",
+            " Destination Port",
+            " Timestamp",
+            " Inbound",
+            "SimillarHTTP",
+            " Protocol",
+        ]
         self.df.drop(list_drop, axis=1, inplace=True)
         self.reduce_tam()
         # self.best_features_func()
@@ -63,21 +75,18 @@ class ClearDataCIC2019(cd):
 
     # Override
     def save_data(self):
-
         aux_df = self.df
         aux_df.drop([" Label"], axis=1, inplace=True)
 
-        aux_y = pd.DataFrame(self.y, columns=[' Label'])
+        aux_y = pd.DataFrame(self.y, columns=[" Label"])
         aux_df = pd.concat([aux_df, aux_y], axis=1)
-        
-        aux_df.to_csv(
-            f'./shared/data_prep/CIC19/{self.name_save}.csv', index=False)
 
-        aux_df.to_csv('./shared/data_prep/CIC19/CIC19.csv', index=False)
-        aux_y.to_csv('./shared/data_prep/CIC19/CIC19_y.csv', index=False)
+        aux_df.to_csv(f"./shared/data_prep/CIC19/{self.name_save}.csv", index=False)
 
+        aux_df.to_csv("./shared/data_prep/CIC19/CIC19.csv", index=False)
+        aux_y.to_csv("./shared/data_prep/CIC19/CIC19_y.csv", index=False)
 
     def load_data(self):
-        df = pd.read_csv('./shared/data_prep/CIC19/CIC19.csv')
-        y = pd.read_csv('./shared/data_prep/CIC19/CIC19_y.csv')
+        df = pd.read_csv("./shared/data_prep/CIC19/CIC19.csv")
+        y = pd.read_csv("./shared/data_prep/CIC19/CIC19_y.csv")
         return df, y

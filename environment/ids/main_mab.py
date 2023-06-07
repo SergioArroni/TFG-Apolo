@@ -1,5 +1,5 @@
 from layers import MAB
-from utils import UtilsLoad
+from utils import *
 
 
 # Main function

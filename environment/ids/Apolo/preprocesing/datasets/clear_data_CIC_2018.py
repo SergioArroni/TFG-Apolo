@@ -6,14 +6,14 @@
 
 # ==================> Imports
 import pandas as pd
-from preprocesing import ClearData as cd
-
-from sklearn.feature_selection import SelectKBest, chi2
+from apolo.preprocesing import ClearData
 
 
 # ==================> Classes
-class ClearDataCIC2018(cd):
-    def __init__(self, df: pd.DataFrame, do_save: bool, seed: int, name_save: str, name_load: str) -> None:
+class ClearDataCIC2018(ClearData):
+    def __init__(
+        self, df: pd.DataFrame, do_save: bool, seed: int, name_save: str, name_load: str
+    ) -> None:
         """__init__
 
         This method is used to initialize the ClearDataCIC2018 class.
@@ -38,7 +38,7 @@ class ClearDataCIC2018(cd):
         Output:
             None
         """
-        self.df.drop(['Timestamp'], axis=1, inplace=True)
+        self.df.drop(["Timestamp"], axis=1, inplace=True)
         self.reduce_tam()
         # self.best_features_func()
         self.drop_one_features()
@@ -49,7 +49,7 @@ class ClearDataCIC2018(cd):
 
         labels = set(self.y)
         labels.remove("Benign")
-        
+
         print(f"labels: {labels}")
 
         self.replace(list_B_columns=["Benign"], list_M_columns=labels)
@@ -63,14 +63,14 @@ class ClearDataCIC2018(cd):
         aux_df = self.df
         aux_df.drop(["Label"], axis=1, inplace=True)
 
-        aux_y = pd.DataFrame(self.y, columns=['Label'])
+        aux_y = pd.DataFrame(self.y, columns=["Label"])
         aux_df = pd.concat([aux_df, aux_y], axis=1)
 
-        aux_df.to_csv('./shared/data_prep/CIC18/CIC18.csv', index=False)
-        aux_y.to_csv('./shared/data_prep/CIC18/CIC18_y.csv', index=False)
+        aux_df.to_csv("./shared/data_prep/CIC18/CIC18.csv", index=False)
+        aux_y.to_csv("./shared/data_prep/CIC18/CIC18_y.csv", index=False)
 
     def load_data(self):
-        df = pd.read_csv('./shared/data_prep/CIC18/CIC18.csv')
-        y = pd.read_csv('./shared/data_prep/CIC18/CIC18_y.csv')
+        df = pd.read_csv("./shared/data_prep/CIC18/CIC18.csv")
+        y = pd.read_csv("./shared/data_prep/CIC18/CIC18_y.csv")
 
         return df, y

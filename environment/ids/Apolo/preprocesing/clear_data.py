@@ -8,19 +8,38 @@
 import datetime
 import numpy as np
 import pandas as pd
-from layers import Model as m
 
-from sklearn.feature_selection import SelectKBest
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder
-
-pd.options.mode.chained_assignment = None  # default='warn'
 
 
 # ==================> Classes
 class ClearData:
-    def __init__(self, df: pd.DataFrame, seed: int, quantile: float = 0.95, max_mediana: int = 10, log_unic: int = 50,
-                 label_f: int = 6) -> None:
+    '''ClearData
+    
+    This class is used to clean the data.
+    
+    Attributes:
+        df (pd.DataFrame): Dataframe to clean.
+        quantile (float): Percentile to cut the data.
+        max_mediana (int): Max value to cut the data.
+        log_unic (int): Max unique values to apply log.
+        label_f (int): Label to predict.
+        x (np.array): Array with the data.
+        y (np.array): Array with the labels.
+        do_log (bool): If True, apply log.
+        save (bool): If True, save the dataframe preprocessed.
+        seed (int): Seed to use.  
+    '''
+    def __init__(
+        self,
+        df: pd.DataFrame,
+        seed: int,
+        quantile: float = 0.95,
+        max_mediana: int = 10,
+        log_unic: int = 50,
+        label_f: int = 6,
+    ) -> None:
         """__init__
 
         This method is used to initialize the ClearData class.
@@ -41,9 +60,9 @@ class ClearData:
         self.label_f = label_f
         self.x = None
         self.y = None
-        # Lo marco a False ya que no que por defecto me haga el logaritmo
+        # Lo marco a False ya que no quiero que por defecto me haga el logaritmo
         self.do_log = False
-        # Lo marco a False ya que no que por defecto me guarde el dataframe preprocesado
+        # Lo marco a False ya que no quiero que por defecto me guarde el dataframe preprocesado
         self.save = False
         self.seed = seed
 
@@ -63,7 +82,7 @@ class ClearData:
         """
         pass
 
-    def load_data(self):
+    def load_data(self) -> None:
         """load_data
 
         This method is used to load the data.
@@ -160,12 +179,20 @@ class ClearData:
         """
 
         for feature in df_numeric.columns:
-            if df_numeric[feature].max() > self.max_mediana * df_numeric[feature].median():
-                self.df[feature] = np.where(self.df[feature] < self.df[feature].quantile(self.quantile),
-                                            self.df[feature], self.df[feature].quantile(self.quantile))
+            if (
+                df_numeric[feature].max()
+                > self.max_mediana * df_numeric[feature].median()
+            ):
+                self.df[feature] = np.where(
+                    self.df[feature] < self.df[feature].quantile(self.quantile),
+                    self.df[feature],
+                    self.df[feature].quantile(self.quantile),
+                )
         return df_numeric.copy()
 
-    def clear_log(self, df_before: pd.DataFrame, df_numeric: pd.DataFrame) -> pd.DataFrame:
+    def clear_log(
+        self, df_before: pd.DataFrame, df_numeric: pd.DataFrame
+    ) -> pd.DataFrame:
         """clear_log
 
         Aqui se aplica la funcion logaritmica a aquellas caracteristicas que superen los Y (50) valores unicos.
@@ -197,9 +224,15 @@ class ClearData:
             None
         """
         for feature in df_cat.columns:
-            if df_cat[feature].nunique() > self.label_f and df_cat[feature].nunique() / self.label_f:
-                self.df[feature] = np.where(self.df[feature].isin(self.df[feature].value_counts().head().index),
-                                            self.df[feature], '-')
+            if (
+                df_cat[feature].nunique() > self.label_f
+                and df_cat[feature].nunique() / self.label_f
+            ):
+                self.df[feature] = np.where(
+                    self.df[feature].isin(self.df[feature].value_counts().head().index),
+                    self.df[feature],
+                    "-",
+                )
         self.drop_bad_elements()
 
     def reduce_tam(self) -> None:
@@ -229,10 +262,12 @@ class ClearData:
         Output:
             None
         """
-        df1 = self.df[self.df["Label"] == "Benign"][:len(
-            self.df[self.df["Label"] == "Malicious"])]
-        df2 = self.df[self.df["Label"] == "Malicious"][:len(
-            self.df[self.df["Label"] == "Malicious"])]
+        df1 = self.df[self.df["Label"] == "Benign"][
+            : len(self.df[self.df["Label"] == "Malicious"])
+        ]
+        df2 = self.df[self.df["Label"] == "Malicious"][
+            : len(self.df[self.df["Label"] == "Malicious"])
+        ]
         self.df = pd.concat([df1, df2], axis=0)
 
     def cast_time(self, label: str, time_format: str) -> None:
@@ -265,8 +300,10 @@ class ClearData:
         Output:
             df_one_hot (np.array): Array with the one hot encoder applied.
         """
-        ct = ColumnTransformer(transformers=[(
-            'encoder', OneHotEncoder(), list_columns)], remainder='passthrough')
+        ct = ColumnTransformer(
+            transformers=[("encoder", OneHotEncoder(), list_columns)],
+            remainder="passthrough",
+        )
         self.x = np.array(ct.fit_transform(self.x))
 
     def replace(self, list_B_columns: list = None, list_M_columns: list = None) -> None:

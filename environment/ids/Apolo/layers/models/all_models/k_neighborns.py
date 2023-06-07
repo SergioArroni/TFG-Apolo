@@ -6,7 +6,7 @@
 
 # ==================> Imports
 from sklearn.neighbors import KNeighborsClassifier
-from layers.models import Model
+from apolo.layers.models import Model
 
 
 # ==================> Classes

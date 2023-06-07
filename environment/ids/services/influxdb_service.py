@@ -21,7 +21,6 @@ class InfluxDBService:
         Output:
             None
         """
-        pass
 
     # Functions
     def get_influxdb_connection(self, url: str, token: str, org: str) -> InfluxDBClient:

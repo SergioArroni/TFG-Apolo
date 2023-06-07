@@ -1,1 +1,1 @@
-from layers.mab.mab import MAB
+from .mab_model import MAB
