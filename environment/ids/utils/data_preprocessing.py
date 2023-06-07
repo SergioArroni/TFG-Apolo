@@ -168,7 +168,7 @@ class DataPreprocessing:
 
         print("Loading new data")
         data.clear_data()
-        trans = transform(x=data.x, y=data.y, size=0.3, seed=seed, df=data.df)
+        trans = transform(x=data.x, y=data.y, seed=seed, df=data.df)
 
         trans.transform_request()
         return trans
@@ -176,6 +176,7 @@ class DataPreprocessing:
     def load_request(
         self,
         dataset_type: str,
+        list_load_request: list,
         name: str = None,
         save: bool = False,
     ) -> object:
@@ -193,7 +194,7 @@ class DataPreprocessing:
 
         # Preprocesar el dataset
         df = self.usl.load_data(
-            self.list_load_dataset,
+            list_load_request,
             self.seed,
         )
 

@@ -16,7 +16,7 @@ from sklearn.model_selection import train_test_split
 # ==================> Classes
 class Transform:
     def __init__(
-        self, x: list, y: list, size: float, seed: int, df: pd.DataFrame = None
+        self, x: list, y: list, seed: int, size: float = None, df: pd.DataFrame = None
     ) -> None:
         """__init__
 
@@ -65,9 +65,20 @@ class Transform:
         self.x_test = nc.transform(self.x_test)
 
     def transform_request(self) -> None:
-        rc = RobustScaler(with_centering=False)
+        """transform_request
+
+        This method is used to transform the request.
+
+        Output:
+            None
+        """
+
+        rc = RobustScaler()
         nc = Normalizer()
 
-        self.df = rc.transform(self.df)
+        self.x = rc.fit_transform(self.x)
 
-        self.df = nc.transform(self.df)
+        self.x[np.isnan(self.x)] = 0
+
+        self.x = nc.fit_transform(self.x)
+
