@@ -24,7 +24,7 @@ class KMeansCluster(Model):
         y_test: list = None,
         dataset: str = None,
         k: int = 2,
-        exe: bool = True,
+        exe: bool = False,
     ) -> None:
         """__init__
 

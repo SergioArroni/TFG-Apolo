@@ -6,6 +6,7 @@
 
 # ==================> Imports
 import numpy as np
+import pandas as pd
 
 from sklearn.preprocessing import Normalizer
 from sklearn.preprocessing import RobustScaler
@@ -14,7 +15,9 @@ from sklearn.model_selection import train_test_split
 
 # ==================> Classes
 class Transform:
-    def __init__(self, x: list, y: list, size: float, seed: int) -> None:
+    def __init__(
+        self, x: list, y: list, size: float, seed: int, df: pd.DataFrame = None
+    ) -> None:
         """__init__
 
         This method is used to initialize the Transform class.
@@ -34,6 +37,7 @@ class Transform:
         self.y_train = None
         self.y_test = None
         self.seed = seed
+        self.df = df
 
     def transform(self) -> None:
         """transform
@@ -59,3 +63,11 @@ class Transform:
 
         self.x_train = nc.fit_transform(self.x_train)
         self.x_test = nc.transform(self.x_test)
+
+    def transform_request(self) -> None:
+        rc = RobustScaler(with_centering=False)
+        nc = Normalizer()
+
+        self.df = rc.transform(self.df)
+
+        self.df = nc.transform(self.df)

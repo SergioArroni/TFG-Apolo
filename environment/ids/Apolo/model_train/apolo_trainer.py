@@ -27,7 +27,7 @@ class ApoloTrainer:
         ul: UtilsLoad object.
     """
 
-    def __init__(self) -> None:
+    def __init__(self, seed: int = 42) -> None:
         """__init__
 
         This method is used to initialize the ApoloTrainer class.
@@ -39,14 +39,15 @@ class ApoloTrainer:
         """
         self.us = UtilsSave()
         self.ul = UtilsLoad()
+        self.seed = seed
         arms = [
-            RandomForest(seed=seed, exe=False),
-            DecisionTree(seed=seed, exe=False),
-            NaiveBayes(seed=seed, exe=False),
-            LogisticRegressionModel(seed=seed, exe=False),
-            MLP(seed=seed, exe=False),
+            RandomForest(seed=self.seed, exe=False).expecific_model(),
+            DecisionTree(seed=self.seed, exe=False).expecific_model(),
+            NaiveBayes(seed=self.seed, exe=False).expecific_model(),
+            LogisticRegressionModel(seed=self.seed, exe=False).expecific_model(),
+            MLP(seed=self.seed, exe=False).expecific_model(),
         ]
-        self.mab = MAB()
+        self.mab = MAB(arms=arms, n_clusters=2)
 
     def train_model(
         self,
@@ -54,7 +55,7 @@ class ApoloTrainer:
         y_train: list,
         X_test: list,
         y_test: list,
-        url: str = "../saved_models/Apolo",
+        url: str = "apolo/saved_apolo/Apolo",
     ) -> None:
         """train_model
 
@@ -70,19 +71,23 @@ class ApoloTrainer:
             None
         """
 
-        model = self.mab.train(X_train, y_train, X_test, y_test)
-        self.us.save_model(model, url)
+        self.mab.train(X_test=X_test, y_test=y_test, X_train=X_train, y_train=y_train)
+        self.us.save_model(self.mab, url)
 
-    def test_model(self, X_test: list, url: str = "../saved_apolo/Apolo") -> None:
+    def test_model(self, df_preprocessed: object, url: str = "apolo/saved_apolo/Apolo") -> None:
         """test_model
 
         This method is used to test a model.
 
         Parameters:
-            X_test: Testing data.
+            df_preprocessed: Preprocessed dataset.
             url: URL where the model is saved.
         Output:
             None
         """
-
-        UtilsLoad.load_model(url).test(X_test)
+        
+        model = self.ul.load_model(name=url)
+        model.test(df_preprocessed)
+        print("Tested")
+        model.print_arms_test()
+        print("Printed")

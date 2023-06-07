@@ -22,7 +22,7 @@ class RandomForest(Model):
         dataset: str = None,
         n_estimators: int = 100,
         n_jobs: int = -1,
-        exe: bool = True,
+        exe: bool = False,
     ) -> None:
         """__init__
 
@@ -41,15 +41,15 @@ class RandomForest(Model):
         """
         self.n_estimators = n_estimators
         self.n_jobs = n_jobs
+        super().__init__(
+            x_train=x_train,
+            y_train=y_train,
+            x_test=x_test,
+            y_test=y_test,
+            dataset=dataset,
+            seed=seed,
+        )
         if exe:
-            super().__init__(
-                x_train=x_train,
-                y_train=y_train,
-                x_test=x_test,
-                y_test=y_test,
-                dataset=dataset,
-                seed=seed,
-            )
             self.exe()
 
     # Override

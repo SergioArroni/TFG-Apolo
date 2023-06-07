@@ -22,7 +22,7 @@ class UtilsSave:
         """
         self.seed = seed
 
-    def save_model(self, model, name: str) -> None:
+    def save_model(self, model: object, name: str) -> None:
         """save_model
 
         This function saves the model
@@ -34,7 +34,6 @@ class UtilsSave:
             None
         """
         # Its important to use binary mode
-        name = f"intrusion_detection_systems/models/saved_models/{name}"
         save = open(name, "wb")
 
         # source, destination

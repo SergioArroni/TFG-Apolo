@@ -6,11 +6,20 @@
 
 # ==================> Imports
 from utils import UtilsLoad
+from utils import DataPreprocessing
 
 
 # ==================> Classes
 class ApoloPredict:
-    def __init__(self) -> None:
+    """ApoloPredict
+
+    This class is used to predict a request.
+
+    Attributes:
+        ul: UtilsLoad object.
+    """
+
+    def __init__(self, seed:int = 42) -> None:
         """__init__
 
         This method is used to initialize the ApoloPredict class.
@@ -20,9 +29,12 @@ class ApoloPredict:
         Output:
             None
         """
+        self.seed = seed
+        self.ul = UtilsLoad()
+        self.data_prep = DataPreprocessing(seed=self.seed)
 
     def classify_request(
-        self, request: object, url: str = "../saved_apolo/Apolo"
+        self, nombre_dataset: str, request: list, url: str = "../saved_apolo/Apolo"
     ) -> int:
         """classify_request
 
@@ -34,6 +46,6 @@ class ApoloPredict:
         Output:
             Classification result.
         """
-        ul = UtilsLoad()
-        
-        return ul.load_model(name = url).predict(request)
+        df_preprocessed = self.data_prep.load_request(dataset_type="Data_Our")
+
+        return self.ul.load_model(name=url).predict(df_preprocessed.df)

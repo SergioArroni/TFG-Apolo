@@ -15,6 +15,7 @@ from sklearn.metrics import classification_report
 from sklearn.metrics import f1_score, recall_score, roc_auc_score
 
 from apolo.layers.clustering import KMeansCluster
+from utils import UtilsLoad
 
 
 # ==================> Classes
@@ -56,6 +57,7 @@ class MAB:
         self.alpha = np.ones(self.n_arms)
         self.beta = np.ones(self.n_arms)
         self.kmeans = KMeansCluster(k=self.n_clusters, seed=seed).expecific_model()
+        self.usl = UtilsLoad()
 
         for cluster in range(self.n_clusters):
             self.reward_sums[cluster] = np.zeros(self.n_arms)
@@ -98,8 +100,8 @@ class MAB:
         for i in range(self.n_clusters):
             print(f"[Test] Cluster {i}: {np.sum(self.cluster_assignments == i)}")
             cluster_mask = self.cluster_assignments == i
-            cluster_X_test = X_test[cluster_mask]
-            cluster_y_test = y_test[cluster_mask]
+            cluster_X_test = X_train[cluster_mask]
+            cluster_y_test = y_train[cluster_mask]
 
             for arm in range(self.n_arms):
                 print(f"Setting reward_sums arm {arm} on cluster {i}")
@@ -164,7 +166,9 @@ class MAB:
 
         return y_pred, arms
 
-    def test(self, df_preprocessed: object, name: str = "MAB_test.txt") -> None:
+    def test(
+        self, df_preprocessed: object, name: str = "apolo/results/MAB_test.txt", load_model:str = None
+    ) -> None:
         """test
 
         This method is used to test the MAB.
@@ -175,9 +179,13 @@ class MAB:
         Output:
             None
         """
-
+        
         # Test the MAB
-        self.y_pred, self.selected_arms = self.predict(df_preprocessed.x_test)
+        if load_model is not None:
+            model = self.usl.load_model(name=load_model)
+            self.y_pred, self.selected_arms = model.predict(df_preprocessed.x_test)
+        else:
+            self.y_pred, self.selected_arms = self.predict(df_preprocessed.x_test)
 
         # Transform the y_pred values to 0 and 1 strings
         self.y_test = np.array([int(y) for y in df_preprocessed.y_test])
@@ -190,20 +198,26 @@ class MAB:
         )
 
         # Print y_pred unique values
-        v.write(np.unique(self.y_pred) + "\n")
+        v.write(f"{np.unique(self.y_pred)}\n")
 
         # Print y_test unique values
-        v.write(np.unique(self.y_test) + "\n")
+        v.write(f"{np.unique(self.y_test)}\n")
 
-        v.write(classification_report(self.y_test, self.y_pred) + "\n")
-        v.write("Accuracy:", accuracy_score(self.y_test, self.y_pred) + "\n")
-        v.write(
-            "Recall:", recall_score(self.y_test, self.y_pred, average="macro") + "\n"
-        )
-        v.write("F1 Score:", f1_score(self.y_test, self.y_pred, average="macro") + "\n")
-        v.write("ROC AUC Score:", roc_auc_score(self.y_test, self.y_pred) + "\n")
+        v.write(f"{classification_report(self.y_test, self.y_pred)}\n")
 
-    def print_arms_test(self, name: str = "ARMS.txt") -> None:
+        v.write(f"Accuracy: {accuracy_score(self.y_test, self.y_pred)}\n")
+
+        score = recall_score(self.y_test, self.y_pred, average="macro")
+        v.write(f"Recall: {score}\n")
+        
+        score = f1_score(self.y_test, self.y_pred, average="macro")
+        v.write(f"F1 Score: {score}\n")
+        
+        v.write(f"ROC AUC Score: {roc_auc_score(self.y_test, self.y_pred)}\n")
+        
+        v.close()
+
+    def print_arms_test(self, name: str = "apolo/results/ARMS.txt") -> None:
         """print_arms_test
 
         This method is used to print the results of the arms.

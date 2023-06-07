@@ -20,7 +20,7 @@ class KNeighborns(Model):
         dataset: str,
         seed: int,
         k: int = 3,
-        exe: bool = True,
+        exe: bool = False,
     ) -> None:
         """__init__
 

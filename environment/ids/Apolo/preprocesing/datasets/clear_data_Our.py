@@ -74,12 +74,12 @@ class ClearDataOur(ClearData):
         aux_y = pd.DataFrame(self.y, columns=[" Label"])
         aux_df = pd.concat([aux_df, aux_y], axis=1)
 
-        aux_df.to_csv(f"./shared/data_prep/CIC17/{self.name_save}.csv", index=False)
+        aux_df.to_csv(f"apolo/preprocesing/data/save/data_our/{self.name_save}.csv", index=False)
 
-        aux_y.to_csv(f"./shared/data_prep/CIC17/{self.name_save}_y.csv", index=False)
+        aux_y.to_csv(f"apolo/preprocesing/data/save/data_our/{self.name_save}_y.csv", index=False)
 
     # Override
     def load_data(self):
-        df = pd.read_csv(f"./shared/data_prep/CIC17/{self.name_load}.csv")
-        y = pd.read_csv(f"./shared/data_prep/CIC17/{self.name_load}_y.csv")
+        df = pd.read_csv(f"../data/data_our/{self.name_load}.csv")
+        y = pd.read_csv(f"../data/data_our/{self.name_load}_y.csv")
         return df, y

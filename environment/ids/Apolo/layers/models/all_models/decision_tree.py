@@ -20,7 +20,7 @@ class DecisionTree(Model):
         x_test: list = None,
         y_test: list = None,
         dataset: str = None,
-        exe: bool = True,
+        exe: bool = False,
     ) -> None:
         """__init__
 

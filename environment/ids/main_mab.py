@@ -1,15 +1,37 @@
-from layers import MAB
-from utils import *
+from apolo.layers import MAB
+from utils import DataPreprocessing
+from apolo.layers.models import (
+    RandomForest,
+    DecisionTree,
+    NaiveBayes,
+    LogisticRegressionModel,
+    MLP,
+)
+from apolo.model_train import ApoloTrainer
+from apolo.model_predict import ApoloPredict
 
 
 # Main function
 def main() -> None:
     # Train the MAB
-    df_preprocessed = UtilsLoad.load_dataset(
-        dataset_name="CIC-IDS_2017_MAB", dataset_type="CIC_2017"
+    seed = 42
+    data_prep = DataPreprocessing(seed=seed)
+    apolo = ApoloTrainer(seed=seed)
+    testing = ApoloPredict()
+
+    df_preprocessed = data_prep.load_dataset(
+        name="CIC-IDS_2017_MAB", dataset_type="Data_Our"
     )
-    mab = MAB(n_arms=5, n_clusters=2)
-    mab.train(df_preprocessed.x_train, df_preprocessed.y_train)
+
+    """    
+        apolo.train_model(
+        X_test=df_preprocessed.x_test,
+        y_test=df_preprocessed.y_test,
+        X_train=df_preprocessed.x_train,
+        y_train=df_preprocessed.y_train,
+    ) 
+    """
+    apolo.test_model(df_preprocessed=df_preprocessed)
 
 
 # Main function call
