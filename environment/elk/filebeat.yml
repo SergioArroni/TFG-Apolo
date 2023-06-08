@@ -11,5 +11,5 @@ output.logstash:
   
 setup.kibana:
   host: "http://kibana:5601"
-  username: ${ELK_USERNAME}
-  password: ${ELK_PASSWORD}
+  username: SergioArroni
+  password: HijosDeSanPedro

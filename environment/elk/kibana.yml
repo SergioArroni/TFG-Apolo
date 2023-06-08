@@ -8,6 +8,6 @@ elasticsearch.hosts: [ "http://elasticsearch:9200" ]
 xpack.monitoring.ui.container.elasticsearch.enabled: true
 
 ## X-Pack security credentials
-#
-elasticsearch.username: ${ELK_USERNAME}
-elasticsearch.password: ${ELK_PASSWORD}
+
+elasticsearch.username: SergioArroni
+elasticsearch.password: HijosDeSanPedro

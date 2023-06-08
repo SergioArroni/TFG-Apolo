@@ -6,6 +6,7 @@
 
 # ==================> Imports
 import pandas as pd
+import json
 from utils import UtilsLoad
 from apolo.preprocesing import (
     ClearData,
@@ -161,10 +162,21 @@ class DataPreprocessing:
         Output:
             Transform object
         """
+        
+        print("bbb")
+
+        print(df.head())
+        print(df.columns)
 
         data: ClearData = datasets_types[dataset_type](
             df=df, do_save=save, seed=seed, name_save=name_save, name_load=name_load
         )
+        
+        print("ccc")
+
+        print(df.head())
+        print(df.columns)
+
 
         print("Loading new data")
         data.clear_data()
@@ -192,16 +204,22 @@ class DataPreprocessing:
             object
         """
 
+        list_load_request = json.loads([l.decode("utf-8") for l in list_load_request][0])
+
         # Preprocesar el dataset
         df = self.usl.load_data(
-            list_load_request,
-            self.seed,
+            seed=self.seed,
+            json=list_load_request,
         )
+        print("AQUII")
+
+        print(df.head())
+        print(df.columns)
 
         print("Dataset cargado")
 
         df_preprocessed = self.preprocess_request(
-            df,
+            df=df,
             save=save,
             dataset_type=dataset_type,
             seed=self.seed,

@@ -63,7 +63,7 @@ class ScoreManager:
         print("InfluxDB connection established")
 
         value = self.apolo.classify_request(
-            request=last_element, url="../saved_apolo/Apolo"
+            list_load_request=last_element, url="/app/apolo/saved_apolo/Apolo"
         )
 
         element = last_element[0].decode("utf-8")
