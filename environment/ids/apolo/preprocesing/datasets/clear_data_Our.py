@@ -45,24 +45,34 @@ class ClearDataOur(ClearData):
         Output:
             None
         """
-        # self.best_features_func()
-        self.drop_one_features()
+        
         self.drop_duplicate_columns()
 
         self.drop_bad_elements()
-        self.x = self.df.drop([" Label"], axis=1)
-        self.y = self.df[" Label"]
+        
+        print("dddddddddddddddddd")
+
+        print(self.df.head())
+        print(self.df.columns)
+
+        print("----------------------------------------------------------------")
+        
+        print(self.df.columns)
+
+
+        self.x = self.df.drop(["Label"], axis=1)
+        self.y = self.df["Label"]
 
         labels = set(self.y)
 
-        labels.remove("BENIGN")
+        labels.remove("No Label")
 
         print(f"labels: {labels}")
 
-        self.replace(list_B_columns=["BENIGN"], list_M_columns=labels)
-
         self.drop_bad_elements_x()
 
+            
+        print(self.x)
         if self.do_save:
             self.save_data()
 
@@ -70,16 +80,11 @@ class ClearDataOur(ClearData):
     def save_data(self):
         aux_df = self.df
         aux_df.drop([" Label"], axis=1, inplace=True)
-
-        aux_y = pd.DataFrame(self.y, columns=[" Label"])
+        
+        if self.y is not None:
+            aux_y = pd.DataFrame(self.y, columns=[" Label"])
+            aux_y.to_csv(f"apolo/preprocesing/data/save/data_our/{self.name_save}_y.csv", index=False)
+            
         aux_df = pd.concat([aux_df, aux_y], axis=1)
 
         aux_df.to_csv(f"apolo/preprocesing/data/save/data_our/{self.name_save}.csv", index=False)
-
-        aux_y.to_csv(f"apolo/preprocesing/data/save/data_our/{self.name_save}_y.csv", index=False)
-
-    # Override
-    def load_data(self):
-        df = pd.read_csv(f"../data/data_our/{self.name_load}.csv")
-        y = pd.read_csv(f"../data/data_our/{self.name_load}_y.csv")
-        return df, y

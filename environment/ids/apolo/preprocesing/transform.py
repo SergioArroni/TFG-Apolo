@@ -76,6 +76,8 @@ class Transform:
         rc = RobustScaler()
         nc = Normalizer()
 
+        print(self.x)
+        
         self.x = rc.fit_transform(self.x)
 
         self.x[np.isnan(self.x)] = 0
