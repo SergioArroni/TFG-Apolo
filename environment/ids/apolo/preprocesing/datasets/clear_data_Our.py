@@ -16,6 +16,11 @@ class ClearDataOur(ClearData):
 
     This class is used to clear the data from our architecture.
 
+    Attributes:
+        df: pd.DataFrame
+        do_save: bool
+        name_save: str
+        name_load: str
     """
 
     def __init__(
@@ -45,20 +50,10 @@ class ClearDataOur(ClearData):
         Output:
             None
         """
-        
+
         self.drop_duplicate_columns()
 
         self.drop_bad_elements()
-        
-        print("dddddddddddddddddd")
-
-        print(self.df.head())
-        print(self.df.columns)
-
-        print("----------------------------------------------------------------")
-        
-        print(self.df.columns)
-
 
         self.x = self.df.drop(["Label"], axis=1)
         self.y = self.df["Label"]
@@ -71,7 +66,6 @@ class ClearDataOur(ClearData):
 
         self.drop_bad_elements_x()
 
-            
         print(self.x)
         if self.do_save:
             self.save_data()
@@ -80,11 +74,16 @@ class ClearDataOur(ClearData):
     def save_data(self):
         aux_df = self.df
         aux_df.drop([" Label"], axis=1, inplace=True)
-        
+
         if self.y is not None:
             aux_y = pd.DataFrame(self.y, columns=[" Label"])
-            aux_y.to_csv(f"apolo/preprocesing/data/save/data_our/{self.name_save}_y.csv", index=False)
-            
+            aux_y.to_csv(
+                f"apolo/preprocesing/data/save/data_our/{self.name_save}_y.csv",
+                index=False,
+            )
+
         aux_df = pd.concat([aux_df, aux_y], axis=1)
 
-        aux_df.to_csv(f"apolo/preprocesing/data/save/data_our/{self.name_save}.csv", index=False)
+        aux_df.to_csv(
+            f"apolo/preprocesing/data/save/data_our/{self.name_save}.csv", index=False
+        )

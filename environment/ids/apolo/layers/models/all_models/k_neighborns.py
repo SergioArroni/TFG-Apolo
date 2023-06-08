@@ -11,6 +11,14 @@ from apolo.layers.models import Model
 
 # ==================> Classes
 class KNeighborns(Model):
+    """KNeighborns
+
+    This class is used to create a KNeighborns model.
+
+    Attributes:
+        k: Number of neighbors
+    """
+
     def __init__(
         self,
         x_train: list,

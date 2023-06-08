@@ -50,14 +50,16 @@ class MAB:
         """
         self.n_clusters = n_clusters
         self.arms = arms
-        self.n_arms = len(self.arms)
+        self.n_arms: int = len(self.arms)
         self.cluster_centers = None
         self.cluster_assignments = None
         self.reward_sums = {}
         self.alpha = np.ones(self.n_arms)
         self.beta = np.ones(self.n_arms)
-        self.kmeans = KMeansCluster(k=self.n_clusters, seed=seed).expecific_model()
-        self.usl = UtilsLoad()
+        self.kmeans: KMeansCluster = KMeansCluster(
+            k=self.n_clusters, seed=seed
+        ).expecific_model()
+        self.usl: UtilsLoad = UtilsLoad()
 
         for cluster in range(self.n_clusters):
             self.reward_sums[cluster] = np.zeros(self.n_arms)
@@ -167,7 +169,10 @@ class MAB:
         return y_pred, arms
 
     def test(
-        self, df_preprocessed: object, name: str = "apolo/results/MAB_test.txt", load_model:str = None
+        self,
+        df_preprocessed: object,
+        name: str = "apolo/results/MAB_test.txt",
+        load_model: str = None,
     ) -> None:
         """test
 
@@ -179,7 +184,7 @@ class MAB:
         Output:
             None
         """
-        
+
         # Test the MAB
         if load_model is not None:
             model = self.usl.load_model(name=load_model)
@@ -209,12 +214,12 @@ class MAB:
 
         score = recall_score(self.y_test, self.y_pred, average="macro")
         v.write(f"Recall: {score}\n")
-        
+
         score = f1_score(self.y_test, self.y_pred, average="macro")
         v.write(f"F1 Score: {score}\n")
-        
+
         v.write(f"ROC AUC Score: {roc_auc_score(self.y_test, self.y_pred)}\n")
-        
+
         v.close()
 
     def print_arms_test(self, name: str = "apolo/results/ARMS.txt") -> None:

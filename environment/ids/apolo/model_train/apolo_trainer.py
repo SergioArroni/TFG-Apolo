@@ -37,8 +37,8 @@ class ApoloTrainer:
         Output:
             None
         """
-        self.us = UtilsSave()
-        self.ul = UtilsLoad()
+        self.us: UtilsSave = UtilsSave()
+        self.ul: UtilsLoad = UtilsLoad()
         self.seed = seed
         arms = [
             RandomForest(seed=self.seed, exe=False).expecific_model(),
@@ -74,7 +74,9 @@ class ApoloTrainer:
         self.mab.train(X_test=X_test, y_test=y_test, X_train=X_train, y_train=y_train)
         self.us.save_model(self.mab, url)
 
-    def test_model(self, df_preprocessed: object, url: str = "apolo/saved_apolo/Apolo") -> None:
+    def test_model(
+        self, df_preprocessed: object, url: str = "apolo/saved_apolo/Apolo"
+    ) -> None:
         """test_model
 
         This method is used to test a model.
@@ -85,7 +87,7 @@ class ApoloTrainer:
         Output:
             None
         """
-        
+
         model = self.ul.load_model(name=url)
         model.test(df_preprocessed)
         print("Tested")

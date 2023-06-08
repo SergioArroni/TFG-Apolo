@@ -12,6 +12,21 @@ from sklearn.neural_network import MLPClassifier
 
 # ==================> Classes
 class MLP(Model):
+    """MLP
+
+    This class is used to create a MLP model.
+
+    Parameters:
+        x_train: Training data
+        y_train: Training labels
+        x_test: Test data
+        y_test: Test labels
+        dataset: Dataset name
+        exe: Execute the model or not
+    Output:
+        None
+    """
+
     def __init__(
         self,
         seed: int,

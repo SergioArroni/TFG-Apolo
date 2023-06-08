@@ -11,10 +11,14 @@ from apolo.layers.models import Model
 
 # ==================> Classes
 class KMeansCluster(Model):
-    '''KMeansCluster
-    
+    """KMeansCluster
+
     This class is used to create a KMeans model.
-    '''
+
+    Attributes:
+        k: Number of clusters
+    """
+
     def __init__(
         self,
         seed: int,

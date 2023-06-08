@@ -12,6 +12,14 @@ from sklearn.tree import DecisionTreeClassifier
 
 # ==================> Classes
 class DecisionTree(Model):
+    """DecisionTree
+
+    This class is used to create a DecisionTree model.
+
+    Attributes:
+        None
+    """
+
     def __init__(
         self,
         seed: int,

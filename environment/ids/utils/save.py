@@ -10,17 +10,24 @@ import pandas as pd
 
 
 class UtilsSave:
-    def __init__(self, seed: int = 42):
+    """UtilsSave
+
+    This class is used to save data and models.
+
+    Attributes:
+        None
+    """
+
+    def __init__(self):
         """__init__
 
         This method is used to initialize the Utils class.
 
         Parameters:
-            seed (int): seed for reproducibility
+            None
         Output:
             None
         """
-        self.seed = seed
 
     def save_model(self, model: object, name: str) -> None:
         """save_model

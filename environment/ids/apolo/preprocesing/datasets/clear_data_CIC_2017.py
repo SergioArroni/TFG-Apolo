@@ -12,7 +12,16 @@ from apolo.preprocesing import ClearData
 
 # ==================> Functions
 class ClearDataCIC2017(ClearData):
-    """ClearDataCIC2017"""
+    """ClearDataCIC2017
+
+    This class is used to clear the data of the CIC 2017 dataset.
+
+    Attributes:
+        df: pd.DataFrame
+        do_save: bool
+        name_save: str
+        name_load: str
+    """
 
     def __init__(
         self, df: pd.DataFrame, do_save: bool, seed: int, name_save: str, name_load: str

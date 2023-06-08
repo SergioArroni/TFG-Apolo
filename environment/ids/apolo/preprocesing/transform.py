@@ -15,6 +15,22 @@ from sklearn.model_selection import train_test_split
 
 # ==================> Classes
 class Transform:
+    """Transform
+
+    This class is used to transform the data.
+
+    Attributes:
+        x: list
+        y: list
+        size: float
+        x_train: list
+        x_test: list
+        y_train: list
+        y_test: list
+        seed: int
+        df: pd.DataFrame
+    """
+
     def __init__(
         self, x: list, y: list, seed: int, size: float = None, df: pd.DataFrame = None
     ) -> None:
@@ -77,10 +93,9 @@ class Transform:
         nc = Normalizer()
 
         print(self.x)
-        
+
         self.x = rc.fit_transform(self.x)
 
         self.x[np.isnan(self.x)] = 0
 
         self.x = nc.fit_transform(self.x)
-

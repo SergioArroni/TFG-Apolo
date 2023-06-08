@@ -1,4 +1,4 @@
-# ========================== SVC =========================
+# ========================== SVCModel =========================
 #
 #                   Author:  Sergio Arroni Del Riego
 #
@@ -10,7 +10,20 @@ from sklearn.svm import SVC
 
 
 # ==================> Classes
-class SVC(Model):
+class SVCModel(Model):
+    """SVCModel
+
+    This class is used to create a SVC model.
+
+    Attributes:
+        x_train: Training data
+        y_train: Training labels
+        x_test: Test data
+        y_test: Test labels
+        dataset: Dataset name
+        seed: Seed for the random state
+    """
+
     def __init__(
         self,
         seed: int,

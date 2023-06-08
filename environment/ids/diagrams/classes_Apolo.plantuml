@@ -1,0 +1,203 @@
+@startuml classes_Apolo
+set namespaceSeparator none
+class "ApoloPredict" as ids.apolo.model_predict.apolo_classifier.ApoloPredict {
+  data_prep
+  seed : int
+  usl : UtilsLoad
+  classify_request(list_load_request: list, url: str) -> tuple
+}
+class "ApoloTrainer" as ids.apolo.model_train.apolo_trainer.ApoloTrainer {
+  mab
+  seed : int
+  usl : UtilsLoad
+  uss : UtilsSave
+  test_model(df_preprocessed: object, url: str) -> None
+  train_model(X_train: list, y_train: list, X_test: list, y_test: list, url: str) -> None
+}
+class "ClearData" as ids.apolo.preprocesing.clear_data.ClearData {
+  df : NoneType, DataFrame
+  do_log : bool
+  label_f : int
+  log_unic : int
+  max_mediana : int
+  quantile : float
+  save : bool
+  seed : int
+  x : ndarray, NoneType
+  y : NoneType
+  best_features_func() -> None
+  cast_time(label: str, time_format: str) -> None
+  {abstract}clear_data() -> None
+  clear_freq(df_cat: pd.DataFrame) -> None
+  clear_log(df_before: pd.DataFrame, df_numeric: pd.DataFrame) -> pd.DataFrame
+  clear_valores_atipicos(df_numeric: pd.DataFrame) -> pd.DataFrame
+  {abstract}drop_bad_elements() -> None
+  drop_bad_elements_x() -> None
+  drop_duplicate_columns() -> None
+  drop_one_features() -> None
+  {abstract}load_data() -> None
+  loss_data() -> None
+  one_shotear(list_columns: list) -> np.array
+  reduce_tam() -> None
+  replace(list_B_columns: list, list_M_columns: list) -> None
+  {abstract}save_data() -> None
+}
+class "ClearDataCIC2017" as ids.apolo.preprocesing.datasets.clear_data_CIC_2017.ClearDataCIC2017 {
+  do_save : bool
+  name_load : str
+  name_save : str
+  x
+  y
+  clear_data() -> None
+  load_data() -> tuple
+  save_data() -> None
+}
+class "ClearDataCIC2018" as ids.apolo.preprocesing.datasets.clear_data_CIC_2018.ClearDataCIC2018 {
+  do_save : bool
+  name_load : str
+  name_save : str
+  x
+  y
+  clear_data() -> None
+  load_data()
+  save_data()
+}
+class "ClearDataCIC2019" as ids.apolo.preprocesing.datasets.clear_data_CIC_2019.ClearDataCIC2019 {
+  do_save : bool
+  name_load : str
+  name_save : str
+  x
+  y
+  clear_data() -> None
+  load_data()
+  save_data()
+}
+class "ClearDataOur" as ids.apolo.preprocesing.datasets.clear_data_Our.ClearDataOur {
+  do_save : bool
+  name_load : str
+  name_save : str
+  x
+  y
+  clear_data() -> None
+  save_data()
+}
+class "DataCollector" as ids.storage.data_collector.DataCollector {
+  last_element : list
+  redis : RedisService
+  get_data_from_queue(redis_connection, list_name: str) -> None
+}
+class "DataSelector" as ids.utils.data_selector.DataSelector {
+  list_load_dataset : list
+  seed : int
+  usl : UtilsLoad
+  load_dataset(dataset_type: str, name: str, load_dataset: bool, save: bool) -> object
+  load_request(dataset_type: str, list_load_request: list, name: str, save: bool) -> object
+  preprocess_dataset(df: pd.DataFrame, save: bool, dataset_type: str, seed: int, name_save: str, name_load: str, load: bool) -> transform
+  preprocess_request(df: pd.DataFrame, save: bool, dataset_type: str, seed: int, name_save: str, name_load: str) -> transform
+}
+class "DecisionTree" as ids.apolo.layers.models.all_models.decision_tree.DecisionTree {
+  expecific_model() -> DecisionTreeClassifier
+}
+class "InfluxDBService" as ids.services.influxdb_service.InfluxDBService {
+  add_influxdb_data(influxdb_connection: InfluxDBClient, bucket: str, measurement_name: str, value: float, tags: dict) -> None
+  close_influxdb_connection(influxdb_connection: InfluxDBClient) -> None
+  get_influxdb_connection(url: str, token: str, org: str) -> InfluxDBClient
+}
+class "KMeansCluster" as ids.apolo.layers.clustering.kmeans_cluster.KMeansCluster {
+  k : int
+  expecific_model() -> KMeans
+}
+class "KNeighborns" as ids.apolo.layers.models.all_models.k_neighborns.KNeighborns {
+  k : int
+  expecific_model() -> KNeighborsClassifier
+}
+class "LogisticRegressionModel" as ids.apolo.layers.models.all_models.logistic_regression.LogisticRegressionModel {
+  expecific_model() -> LogisticRegression
+}
+class "SVCModel" as ids.apolo.layers.models.all_models.svc.SVCModel {
+  expecific_model() -> SVC
+}
+class "MAB" as ids.apolo.layers.mab.mab_model.MAB {
+  alpha : ndarray
+  arms : list
+  beta : ndarray
+  cluster_assignments : NoneType
+  cluster_centers : NoneType
+  kmeans : KMeansCluster
+  n_arms : int
+  n_clusters : int
+  reward_sums : dict
+  selected_arms : ndarray
+  usl : UtilsLoad
+  y_pred : ndarray
+  y_test : ndarray
+  predict(X_test: list) -> tuple
+  print_arms_test(name: str) -> None
+  select_arm(cluster: int) -> int
+  test(df_preprocessed: object, name: str, load_model: str) -> None
+  train(X_train: list, y_train: list, X_test: list, y_test: list) -> None
+}
+class "MLP" as ids.apolo.layers.models.all_models.mlp.MLP {
+  expecific_model() -> object
+}
+class "Model" as ids.apolo.layers.models.model.Model {
+  dataset : str
+  model_trained : object
+  predictions : list
+  seed : int
+  time_total : list
+  x_test : list
+  x_train : list
+  y_test : list
+  y_train : list
+  exe() -> None
+  {abstract}expecific_model() -> object
+  model_train_test() -> None
+  predict(test_x: list) -> list
+}
+class "NaiveBayes" as ids.apolo.layers.models.all_models.naive_bayes.NaiveBayes {
+  expecific_model() -> GaussianNB
+}
+class "RandomForest" as ids.apolo.layers.models.all_models.random_forest.RandomForest {
+  n_estimators : int
+  n_jobs : int
+  expecific_model() -> RandomForestClassifier
+}
+class "RedisService" as ids.services.redis_service.RedisService {
+  close_redis_connection(redis_connection: redis.Redis) -> None
+  get_redis_connection(host: str, port: int, db: int) -> redis.Redis
+  get_redis_list(redis_connection: redis.Redis, list_name: str) -> list
+  get_redis_list_last_n_elements(redis_connection: redis.Redis, list_name: str, n: int) -> list
+  get_redis_list_last_n_elements_and_delete_them(redis_connection: redis.Redis, list_name: str, n: int) -> list
+  remove_redis_list_all_elements(redis_connection: redis.Redis, list_name: str) -> None
+  remove_redis_list_last_n_elements(redis_connection: redis.Redis, list_name: str, n: int) -> None
+}
+class "ScoreManager" as ids.storage.score_manager.ScoreManager {
+  apolo_predict : ApoloPredict
+  ixs : InfluxDBService
+  push_data_to_influxdb(last_element: list, url: str, org: str) -> None
+}
+class "Transform" as ids.apolo.preprocesing.transform.Transform {
+  df : DataFrame
+  seed : int
+  size : Optional[float]
+  x : list, str, tuple
+  x_test : str, tuple, NoneType
+  x_train : str, NoneType, tuple
+  y : list
+  y_test : NoneType
+  y_train : NoneType
+  transform() -> None
+  transform_request() -> None
+}
+class "UtilsLoad" as ids.utils.load.UtilsLoad {
+  seed : int
+  load_data(path: list, seed: int, json: dict) -> pd.DataFrame
+  load_data_cic(json: dict) -> pd.DataFrame
+  load_model(name: str) -> object
+}
+class "UtilsSave" as ids.utils.save.UtilsSave {
+  save_data(df: pd.DataFrame, name: str) -> None
+  save_model(model: object, name: str) -> None
+}
+@enduml

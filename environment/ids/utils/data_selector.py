@@ -49,7 +49,7 @@ class DataSelector:
             None
         """
         self.seed = seed
-        self.usl = UtilsLoad()
+        self.usl: UtilsLoad = UtilsLoad()
         self.list_load_dataset = [
             "apolo/preprocesing/data/CIC_2017/Thursday-WorkingHours-Afternoon-Infilteration.pcap_ISCX.csv",
             "apolo/preprocesing/data/CIC_2017/Thursday-WorkingHours-Morning-WebAttacks.pcap_ISCX.csv",

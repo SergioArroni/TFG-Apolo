@@ -10,6 +10,22 @@ import time
 
 # ==================> Classes
 class Model:
+    """Model
+
+    This class is used to create a model object that will be used to train and test a model.
+
+    Attributes:
+        predictions: Predictions of the test data
+        time_total: Total time of the training and testing of the model
+        model_trained: Trained model
+        dataset: Dataset name
+        x_train: Training data
+        y_train: Training labels
+        x_test: Test data
+        y_test: Test labels
+        seed: Seed for the random state
+    """
+
     def __init__(
         self,
         x_train: list,

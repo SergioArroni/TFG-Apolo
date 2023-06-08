@@ -5,7 +5,6 @@
 # ================================================================
 
 # ==================> Imports
-import pandas as pd
 import os
 import json
 from services import InfluxDBService
@@ -20,7 +19,6 @@ class ScoreManager:
 
     Attributes:
         ixs (object): InfluxDBService object
-        ul (object): UtilsLoad object
         apolo (object): ApoloPredict object
 
     """
@@ -35,8 +33,8 @@ class ScoreManager:
         Output:
             None
         """
-        self.ixs = InfluxDBService()
-        self.apolo = ApoloPredict()
+        self.ixs: InfluxDBService = InfluxDBService()
+        self.apolo_predict: ApoloPredict = ApoloPredict()
 
     def push_data_to_influxdb(
         self, last_element: list, url: str = "http://influxdb:8086", org: str = "TFG"
@@ -62,7 +60,7 @@ class ScoreManager:
         # Add the last element of the Redis list to the InfluxDB database
         print("InfluxDB connection established")
 
-        value = self.apolo.classify_request(
+        value = self.apolo_predict.classify_request(
             list_load_request=last_element, url="/app/apolo/saved_apolo/Apolo"
         )
 
@@ -85,8 +83,3 @@ class ScoreManager:
         self.ixs.close_influxdb_connection(influxdb_connection=influxdb_connection)
 
         print("InfluxDB connection closed")
-
-    def get_dataset(self, url: str) -> None:
-        # TODO: Change this method to get the dataset from the InfluxDB database
-        print("Getting dataset from url: " + url)
-        self.dataset = pd.read_csv(url)

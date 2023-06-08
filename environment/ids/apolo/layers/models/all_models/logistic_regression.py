@@ -12,6 +12,19 @@ from sklearn.linear_model import LogisticRegression
 
 # ==================> Classes
 class LogisticRegressionModel(Model):
+    """LogisticRegressionModel
+
+    This class is used to create a Logistic Regression model.
+
+    Attributes:
+        x_train: Training data
+        y_train: Training labels
+        x_test: Test data
+        y_test: Test labels
+        dataset: Dataset name
+        seed: Seed for the random state
+    """
+
     def __init__(
         self,
         seed: int,

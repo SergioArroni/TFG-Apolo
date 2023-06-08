@@ -1,0 +1,124 @@
+@startuml packages_Apolo
+set namespaceSeparator none
+package "ids" as ids {
+}
+package "ids.apolo" as ids.apolo {
+}
+package "ids.apolo.layers" as ids.apolo.layers {
+}
+package "ids.apolo.layers.clustering" as ids.apolo.layers.clustering {
+}
+package "ids.apolo.layers.clustering.kmeans_cluster" as ids.apolo.layers.clustering.kmeans_cluster {
+}
+package "ids.apolo.layers.mab" as ids.apolo.layers.mab {
+}
+package "ids.apolo.layers.mab.mab_model" as ids.apolo.layers.mab.mab_model {
+}
+package "ids.apolo.layers.models" as ids.apolo.layers.models {
+}
+package "ids.apolo.layers.models.all_models" as ids.apolo.layers.models.all_models {
+}
+package "ids.apolo.layers.models.all_models.decision_tree" as ids.apolo.layers.models.all_models.decision_tree {
+}
+package "ids.apolo.layers.models.all_models.k_neighborns" as ids.apolo.layers.models.all_models.k_neighborns {
+}
+package "ids.apolo.layers.models.all_models.logistic_regression" as ids.apolo.layers.models.all_models.logistic_regression {
+}
+package "ids.apolo.layers.models.all_models.mlp" as ids.apolo.layers.models.all_models.mlp {
+}
+package "ids.apolo.layers.models.all_models.naive_bayes" as ids.apolo.layers.models.all_models.naive_bayes {
+}
+package "ids.apolo.layers.models.all_models.random_forest" as ids.apolo.layers.models.all_models.random_forest {
+}
+package "ids.apolo.layers.models.all_models.svc" as ids.apolo.layers.models.all_models.svc {
+}
+package "ids.apolo.layers.models.model" as ids.apolo.layers.models.model {
+}
+package "ids.apolo.model_predict" as ids.apolo.model_predict {
+}
+package "ids.apolo.model_predict.apolo_classifier" as ids.apolo.model_predict.apolo_classifier {
+}
+package "ids.apolo.model_train" as ids.apolo.model_train {
+}
+package "ids.apolo.model_train.apolo_trainer" as ids.apolo.model_train.apolo_trainer {
+}
+package "ids.apolo.preprocesing" as ids.apolo.preprocesing {
+}
+package "ids.apolo.preprocesing.clear_data" as ids.apolo.preprocesing.clear_data {
+}
+package "ids.apolo.preprocesing.datasets" as ids.apolo.preprocesing.datasets {
+}
+package "ids.apolo.preprocesing.datasets.clear_data_CIC_2017" as ids.apolo.preprocesing.datasets.clear_data_CIC_2017 {
+}
+package "ids.apolo.preprocesing.datasets.clear_data_CIC_2018" as ids.apolo.preprocesing.datasets.clear_data_CIC_2018 {
+}
+package "ids.apolo.preprocesing.datasets.clear_data_CIC_2019" as ids.apolo.preprocesing.datasets.clear_data_CIC_2019 {
+}
+package "ids.apolo.preprocesing.datasets.clear_data_Our" as ids.apolo.preprocesing.datasets.clear_data_Our {
+}
+package "ids.apolo.preprocesing.transform" as ids.apolo.preprocesing.transform {
+}
+package "ids.main" as ids.main {
+}
+package "ids.main_mab" as ids.main_mab {
+}
+package "ids.services" as ids.services {
+}
+package "ids.services.influxdb_service" as ids.services.influxdb_service {
+}
+package "ids.services.redis_service" as ids.services.redis_service {
+}
+package "ids.storage" as ids.storage {
+}
+package "ids.storage.data_collector" as ids.storage.data_collector {
+}
+package "ids.storage.score_manager" as ids.storage.score_manager {
+}
+package "ids.utils" as ids.utils {
+}
+package "ids.utils.data_selector" as ids.utils.data_selector {
+}
+package "ids.utils.load" as ids.utils.load {
+}
+package "ids.utils.save" as ids.utils.save {
+}
+ids.apolo --> ids.apolo.layers
+ids.apolo --> ids.apolo.model_predict
+ids.apolo --> ids.apolo.model_train
+ids.apolo.layers --> ids.apolo.layers.clustering
+ids.apolo.layers --> ids.apolo.layers.mab
+ids.apolo.layers --> ids.apolo.layers.models
+ids.apolo.layers.clustering --> ids.apolo.layers.clustering.kmeans_cluster
+ids.apolo.layers.mab --> ids.apolo.layers.mab.mab_model
+ids.apolo.layers.models --> ids.apolo.layers.models.all_models
+ids.apolo.layers.models --> ids.apolo.layers.models.model
+ids.apolo.layers.models.all_models --> ids.apolo.layers.models.all_models.decision_tree
+ids.apolo.layers.models.all_models --> ids.apolo.layers.models.all_models.k_neighborns
+ids.apolo.layers.models.all_models --> ids.apolo.layers.models.all_models.logistic_regression
+ids.apolo.layers.models.all_models --> ids.apolo.layers.models.all_models.mlp
+ids.apolo.layers.models.all_models --> ids.apolo.layers.models.all_models.naive_bayes
+ids.apolo.layers.models.all_models --> ids.apolo.layers.models.all_models.random_forest
+ids.apolo.layers.models.all_models --> ids.apolo.layers.models.all_models.svc
+ids.apolo.model_predict --> ids.apolo.model_predict.apolo_classifier
+ids.apolo.model_train --> ids.apolo.model_train.apolo_trainer
+ids.apolo.preprocesing --> ids.apolo.preprocesing.clear_data
+ids.apolo.preprocesing --> ids.apolo.preprocesing.datasets
+ids.apolo.preprocesing --> ids.apolo.preprocesing.transform
+ids.apolo.preprocesing.datasets --> ids.apolo.preprocesing.datasets.clear_data_CIC_2017
+ids.apolo.preprocesing.datasets --> ids.apolo.preprocesing.datasets.clear_data_CIC_2018
+ids.apolo.preprocesing.datasets --> ids.apolo.preprocesing.datasets.clear_data_CIC_2019
+ids.apolo.preprocesing.datasets --> ids.apolo.preprocesing.datasets.clear_data_Our
+ids.main --> ids.storage
+ids.main_mab --> ids.apolo.layers
+ids.main_mab --> ids.apolo.layers.models
+ids.main_mab --> ids.apolo.model_predict
+ids.main_mab --> ids.apolo.model_train
+ids.main_mab --> ids.utils
+ids.services --> ids.services.influxdb_service
+ids.services --> ids.services.redis_service
+ids.storage --> ids.storage.data_collector
+ids.storage --> ids.storage.score_manager
+ids.utils --> ids.utils.data_selector
+ids.utils --> ids.utils.load
+ids.utils --> ids.utils.save
+@enduml

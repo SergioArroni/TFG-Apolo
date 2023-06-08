@@ -31,7 +31,7 @@ class DataCollector:
         Output:
             None
         """
-        self.redis = RedisService()
+        self.redis: RedisService = RedisService()
         self.last_element = []
 
     def get_data_from_queue(
@@ -55,10 +55,3 @@ class DataCollector:
         )
 
         print("Last element of the Redis list: " + str(self.last_element))
-
-
-    def get_dataset(self, url: str) -> None:
-        # TODO
-        print("Getting dataset from url: " + url)
-        self.dataset = pd.read_csv(url)
-    

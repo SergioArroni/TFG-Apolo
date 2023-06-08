@@ -16,7 +16,7 @@ class ApoloPredict:
     This class is used to predict a request.
 
     Attributes:
-        ul: UtilsLoad object.
+        usl: UtilsLoad object.
     """
 
     def __init__(self, seed: int = 42) -> None:
@@ -30,7 +30,7 @@ class ApoloPredict:
             None
         """
         self.seed = seed
-        self.ul = UtilsLoad()
+        self.usl: UtilsLoad = UtilsLoad()
         self.data_prep = DataSelector(seed=self.seed)
 
     def classify_request(
@@ -50,6 +50,6 @@ class ApoloPredict:
             dataset_type="Data_Our", list_load_request=list_load_request
         )
 
-        y_pred, arms = self.ul.load_model(name=url).predict(df_preprocessed.x)
+        y_pred, arms = self.usl.load_model(name=url).predict(df_preprocessed.x)
 
         return y_pred, arms
