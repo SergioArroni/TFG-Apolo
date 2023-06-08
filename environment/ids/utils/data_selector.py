@@ -26,7 +26,7 @@ datasets_types = {
 
 
 # ==================> Functions
-class DataPreprocessing:
+class DataSelector:
     """DataPreprocessing
 
     This class is used to preprocess the data.

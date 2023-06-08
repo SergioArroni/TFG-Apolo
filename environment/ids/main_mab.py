@@ -1,5 +1,5 @@
 from apolo.layers import MAB
-from utils import DataPreprocessing
+from utils import DataSelector
 from apolo.layers.models import (
     RandomForest,
     DecisionTree,
@@ -15,7 +15,7 @@ from apolo.model_predict import ApoloPredict
 def main() -> None:
     # Train the MAB
     seed = 42
-    data_prep = DataPreprocessing(seed=seed)
+    data_prep = DataSelector(seed=seed)
     apolo = ApoloTrainer(seed=seed)
     testing = ApoloPredict()
     list_load_request = [

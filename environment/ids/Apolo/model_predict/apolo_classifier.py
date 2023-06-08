@@ -6,7 +6,7 @@
 
 # ==================> Imports
 from utils import UtilsLoad
-from utils import DataPreprocessing
+from utils import DataSelector
 
 
 # ==================> Classes
@@ -31,7 +31,7 @@ class ApoloPredict:
         """
         self.seed = seed
         self.ul = UtilsLoad()
-        self.data_prep = DataPreprocessing(seed=self.seed)
+        self.data_prep = DataSelector(seed=self.seed)
 
     def classify_request(
         self, list_load_request: list, url: str = "apolo/saved_apolo/Apolo"
