@@ -200,4 +200,40 @@ class "UtilsSave" as ids.utils.save.UtilsSave {
   save_data(df: pd.DataFrame, name: str) -> None
   save_model(model: object, name: str) -> None
 }
+ids.utils.data_selector.DataSelector --> "1" ids.utils.load.UtilsLoad
+ids.utils.data_selector.DataSelector --> "1" ids.apolo.preprocesing.transform.Transform
+ids.utils.data_selector.DataSelector --> "1" ids.apolo.preprocesing.clear_data.ClearData  
+ids.utils.data_selector.DataSelector --> "1" ids.apolo.preprocesing.datasets.clear_data_CIC_2017.ClearDataCIC2017
+ids.utils.data_selector.DataSelector --> "1" ids.apolo.preprocesing.datasets.clear_data_CIC_2018.ClearDataCIC2018
+ids.utils.data_selector.DataSelector --> "1" ids.apolo.preprocesing.datasets.clear_data_CIC_2019.ClearDataCIC2019
+ids.utils.data_selector.DataSelector --> "1" ids.apolo.preprocesing.datasets.clear_data_Our.ClearDataOur
+ids.apolo.model_train.apolo_trainer.ApoloTrainer  --> "1" ids.utils.load.UtilsLoad
+ids.apolo.model_train.apolo_trainer.ApoloTrainer  --> "1" ids.utils.save.UtilsSave
+ids.apolo.model_train.apolo_trainer.ApoloTrainer  --> "1" ids.apolo.layers.mab.mab_model.MAB
+ids.apolo.model_train.apolo_trainer.ApoloTrainer  --> "1" ids.apolo.layers.models.all_models.decision_tree.DecisionTree
+ids.apolo.model_train.apolo_trainer.ApoloTrainer  --> "1" ids.apolo.layers.models.all_models.k_neighborns.KNeighborns
+ids.apolo.model_train.apolo_trainer.ApoloTrainer  --> "1" ids.apolo.layers.models.all_models.logistic_regression.LogisticRegressionModel
+ids.apolo.model_train.apolo_trainer.ApoloTrainer  --> "1" ids.apolo.layers.models.all_models.mlp.MLP
+ids.apolo.model_train.apolo_trainer.ApoloTrainer  --> "1" ids.apolo.layers.models.all_models.naive_bayes.NaiveBayes
+ids.apolo.model_train.apolo_trainer.ApoloTrainer  --> "1" ids.apolo.layers.models.all_models.random_forest.RandomForest
+ids.apolo.model_train.apolo_trainer.ApoloTrainer  --> "1" ids.apolo.layers.models.all_models.svc.SVCModel
+ids.apolo.model_predict.apolo_classifier.ApoloPredict --> "1" ids.utils.load.UtilsLoad
+ids.apolo.model_predict.apolo_classifier.ApoloPredict --> "1" ids.utils.data_selector.DataSelector
+ids.apolo.layers.models.all_models.svc.SVCModel --|> ids.apolo.layers.models.model.Model
+ids.apolo.layers.models.all_models.random_forest.RandomForest --|> ids.apolo.layers.models.model.Model
+ids.apolo.layers.models.all_models.naive_bayes.NaiveBayes --|> ids.apolo.layers.models.model.Model
+ids.apolo.layers.models.all_models.mlp.MLP --|> ids.apolo.layers.models.model.Model
+ids.apolo.layers.models.all_models.logistic_regression.LogisticRegressionModel --|> ids.apolo.layers.models.model.Model
+ids.apolo.layers.models.all_models.k_neighborns.KNeighborns --|> ids.apolo.layers.models.model.Model
+ids.apolo.layers.models.all_models.decision_tree.DecisionTree --|> ids.apolo.layers.models.model.Model
+ids.apolo.layers.clustering.kmeans_cluster.KMeansCluster --|> ids.apolo.layers.models.model.Model
+ids.apolo.preprocesing.datasets.clear_data_CIC_2019.ClearDataCIC2019 --|> ids.apolo.preprocesing.clear_data.ClearData
+ids.apolo.preprocesing.datasets.clear_data_CIC_2018.ClearDataCIC2018 --|> ids.apolo.preprocesing.clear_data.ClearData
+ids.apolo.preprocesing.datasets.clear_data_CIC_2017.ClearDataCIC2017 --|> ids.apolo.preprocesing.clear_data.ClearData
+ids.apolo.preprocesing.datasets.clear_data_Our.ClearDataOur --|> ids.apolo.preprocesing.clear_data.ClearData
+ids.apolo.layers.mab.mab_model.MAB --> "1" ids.utils.load.UtilsLoad
+ids.apolo.layers.mab.mab_model.MAB --> "1" ids.apolo.layers.clustering.kmeans_cluster.KMeansCluster
+ids.storage.score_manager.ScoreManager --> "1" ids.services.influxdb_service.InfluxDBService
+ids.storage.score_manager.ScoreManager --> "1" ids.apolo.model_predict.apolo_classifier.ApoloPredict
+ids.storage.data_collector.DataCollector --> "1" ids.services.redis_service.RedisService
 @enduml

@@ -14,7 +14,7 @@ from apolo.preprocesing import (
     CIC_2018,
     CIC_2019,
     Data_Our,
-    transform,
+    Transform,
 )
 
 # ===================> Enumerations
@@ -116,7 +116,7 @@ class DataSelector:
         name_save: str,
         name_load: str,
         load: bool = True,
-    ) -> transform:
+    ) -> Transform:
         """preprocess_dataset
 
         This function preprocesses a dataset
@@ -134,11 +134,11 @@ class DataSelector:
         if load:
             print("Loading existing data")
             x, y = data.load_data()
-            trans = transform(x=x, y=y, size=0.3, seed=seed)
+            trans = Transform(x=x, y=y, size=0.3, seed=seed)
         else:
             print("Loading new data")
             data.clear_data()
-            trans = transform(x=data.x, y=data.y, size=0.3, seed=seed)
+            trans = Transform(x=data.x, y=data.y, size=0.3, seed=seed)
         trans.transform()
         return trans
 
@@ -150,7 +150,7 @@ class DataSelector:
         seed: int,
         name_save: str,
         name_load: str,
-    ) -> transform:
+    ) -> Transform:
         """preprocess_request
 
         This function preprocesses a request
@@ -180,7 +180,7 @@ class DataSelector:
 
         print("Loading new data")
         data.clear_data()
-        trans = transform(x=data.x, y=data.y, seed=seed, df=data.df)
+        trans = Transform(x=data.x, y=data.y, seed=seed, df=data.df)
 
         trans.transform_request()
         return trans
