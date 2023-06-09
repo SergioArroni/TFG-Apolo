@@ -1,0 +1,20 @@
+/*Especificidad: 001*/
+td, th {
+  width: 4em;
+  height: 2em;
+  border: 0.2em solid #ccc;
+  text-align: center;
+}
+/*Especificidad: 001*/
+th {
+  background-color: lightblue;
+}
+/*Especificidad: 012*/
+table tr:hover {
+  background-color: #ddd;
+}
+/*Especificidad: 001*/
+table{
+  flex:30%;
+  font-size: 0.8em;
+}

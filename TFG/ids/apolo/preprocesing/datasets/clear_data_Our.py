@@ -60,8 +60,9 @@ class ClearDataOur(ClearData):
 
         labels = set(self.y)
 
-        labels.remove("No Label")
-
+        # replace labels for 0
+        self.y = self.y.replace("No Label", 0)
+        
         print(f"labels: {labels}")
 
         self.drop_bad_elements_x()

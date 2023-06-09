@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ejercicio 3</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CalculadoraBasica.css" />
+    <script src="CalculadoraBasica.js"></script>
+    <meta name="keywords" content="Sergio Arroni,Software y estándares en la Web, Universidad de Oviedo, Calculadora, Basica" />
+    <meta name="Autor" content="Sergio Arroni del Riego" />
+    <meta name="Descripción" content="Se trata de una web en la cual hay una calculadora basica" />
+    <meta name ="viewport" content ="width=device-width, initial scale=1.0" />
+  </head>
+  <body>
+    <header>
+      <h1> Grace Murray Hopper </h1>
+        <nav class="menu">
+          <ul>
+            <li><a id="index" href="index.html">Vida y obra</a></li>
+            <li><a id="aportaciones" href="aportaciones.html">Aportaciones</a></li>
+            <li><a id="campos" href="campos.html">Campos de estudio</a></li>
+            <li><a id="cuestionario" href="cuestionario.html">Cuestionario</a></li>
+            <li><a id="CalculadoraBasica" href="CalculadoraBasica.html">CalculadoraBasica</a></li>
+            <li><a id="CalculadoraCientifica" href="CalculadoraCientifica.html">CalculadoraCientifica</a></li>
+            <li><a id="CalculadoraRPN" href="CalculadoraRPN.html">CalculadoraRPN</a></li>
+          </ul>
+        </nav>
+    </header>
+    <h1>Ejercicio3</h1>
+    <form>
+        <fieldset>
+          <input type="submit" value="Reset" />
+        </fieldset>
+
+        <label for="pantalla">Casio</label>
+        <input type="text" id="pantalla" name="pantalla" title="pantalla" disabled />
+  
+        <fieldset>
+          <input id="mrc" type="button" value="mrc" onclick="calculadora.mshow()" />
+          <input id="mr-" type="button" value="mr-" onclick="calculadora.mres()" />
+          <input id="mr+" type="button" value="mr+" onclick="calculadora.madd()" />
+          <input id="/" type="button" value="/" onclick="calculadora.div()" />
+  
+          <input id="7" type="button" value="7" onclick="calculadora.add(7)" />
+          <input id="8" type="button" value="8" onclick="calculadora.add(8)" />
+          <input id="9" type="button" value="9" onclick="calculadora.add(9)" />
+          <input id="*" type="button" value="*" onclick="calculadora.mul()" />
+  
+          <input id="4" type="button" value="4" onclick="calculadora.add(4)" />
+          <input id="5" type="button" value="5" onclick="calculadora.add(5)" />
+          <input id="6" type="button" value="6" onclick="calculadora.add(6)" />
+          <input id="-" type="button" value="-" onclick="calculadora.resta()" />
+  
+          <input id="1" type="button" value="1" onclick="calculadora.add(1)" />
+          <input id="2" type="button" value="2" onclick="calculadora.add(2)" />
+          <input id="3" type="button" value="3" onclick="calculadora.add(3)" />
+          <input id="+" type="button" value="+" onclick="calculadora.suma()" />
+  
+          <input id="0" type="button" value="0" onclick="calculadora.add(0)" />
+          <input id="." type="button" value="." onclick="calculadora.add('.')" />
+          <input id="BottonC" type="button" value="C" onclick="calculadora.clear()" />
+          <input id="=" type="button" value="=" onclick="calculadora.solve()" />
+        </fieldset>
+      </form>
+    <footer>
+      <p>Realizado por: Sergio Arroni del Riego</p>
+    </footer>
+  </body>
+</html>

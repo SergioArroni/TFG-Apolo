@@ -1,0 +1,75 @@
+/*Especificidad: 001*/
+body {
+  background-color: rgb(63, 9, 13);
+  color: rgb(255, 255, 255);
+  font-size: 1.5em;
+}
+/*Especificidad: 001*/
+h1 {
+  text-align: center;
+}
+/*Especificidad: 001*/
+fieldset{
+  
+  max-width: 50%;
+  width: 24em;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+}
+/*Especificidad: 011*/
+fieldset:nth-child(1){
+  display: grid;
+  grid-template-columns: auto;
+  background-color:rgb(0, 0, 0);
+}
+/*Especificidad: 001*/
+form {
+  margin-left: 5em;
+  background-color: rgb(44, 42, 42);
+  width: 15em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  border-radius: 0.5em;
+  display: grid;
+  grid-template-columns: auto;
+}
+/*Especificidad: 011*/
+input[type='button'] {
+  border-radius: 0.5em;
+  height: 2.2em;
+  width: 2.8em;
+  margin: 0.7em;
+}
+/*Especificidad: 011*/
+input[type='submit'] {
+  border-radius: 0.5em;
+  margin: 0.9em;
+  background-color:rgb(122, 126, 180);
+}
+/*Especificidad: 011*/
+input[type='text'] {
+  height: 2.5em;
+  width: 25.5em;
+  margin: 0.5em;
+  color: rgb(0, 0, 0);
+  background-color:darkolivegreen;
+  }
+/*Especificidad: 011*/
+input[value='mrc'],
+input[value='mr+'],
+input[value='mr-'] {
+  background-color: rgb(100, 100, 109);
+  color: white;
+}
+/*Especificidad: 011*/
+input[value='/'],
+input[value='*'],
+input[value='+'],
+input[value='-'] {
+  background-color: rgb(223, 49, 49);
+}
+/*Especificidad: 001*/
+label {
+  color: white;
+}
+

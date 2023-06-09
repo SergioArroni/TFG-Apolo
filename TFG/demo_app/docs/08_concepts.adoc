@@ -1,0 +1,189 @@
+== Concepts
+
+=== Domain model
+
+[options="header",cols="1,2"]
+|===
+|Name|Description
+| Client | User who choose and buy products.
+| POD | User's information.
+| Order | Keep a list of the products that the customer has ordered.
+| Product | Contains information about a product, such as name and price.
+| ProductInOrder | Product associated with an order, saves the quantity that the customer wants of the product.
+| DistributionCenter | Place from where the products are distributed, contains the address of the distribution center.
+| ProductStore | Entity which join Product with Distribution Center. It has the stock.
+|===
+
+image:08_umldiagram.png["Domain Model - UML Diagram"]
+
+=== Persistence
+
+At the beginning there was a debate about whether it was better to use SQL or NoSQL for persistence. After some discussion it was concluded that the best option for this problem is NoSQL. To be more specific MongoDB, which is a NoSQL document database. We will use a NoSQL database as opposed to a SQL database, because our model encompasses many products. These products have several attributes which are very different. For example, a power supply differs in many ways from a graphics card. Because there are so many items, we believe it is best to use a NoSQL DB. But, because of our hexagonal architecture, we can switch from NoSQL to SQL without needing to modify the code, or switch from MongoDB to Cassandra, the change doesn't matter because the backend is not related to the persistence used
+
+=== User interface
+
+_DeDe user interface is desinged to give every user an intuitive and familiar experience related using the React framework combined with TypeScript as constraints. We follow the usual standards of e-commerce online sites to make the navigation closer to what most of the people already know. Also, the interface is meant to pass the AAA validation so we make sure it's usable for almost everyone. In terms of dependencies, we worked with MUI for some of the components (buttons, tables...), bootstrap alongside with bootswatch to give the app a defined style and use some of it's components, and, sweetalert2 to throw modal windows at some points of the application._
+
+Prototype version of DeDesktop:
+
+image:08_UI-Homepage.png["Catalog initial prototype"]
+
+image:08_UI-OtherWindows.png["Other Windows initial prototype"]
+
+Middle Version of DeDesktop
+
+image:08_dede_login.PNG["Login"]
+
+image:08_dede_catalog.PNG["Catalogo"]
+
+Final Version of DeDesktop
+
+image:08_Homepage-final.PNG["Login"]
+
+image:08_Login-final.PNG["Catalogo"]
+
+=== Internazionalization
+
+The application will potentially deal with various locations and people, so make a multi-language application looks like the best decision. This decision must be done since the begining of the desing (lately will cost a lot of resources).
+
+This allows us to reach a bigger audience and make the application more accesible.
+
+
+=== Security
+
+For security we have used an asynchronous encryption algorithm called PBKDF2, which is one of the most famous KDF encryption algorithms. The user will put a password in plain text, which will be encrypted using a Hash function, a salt will be added to it, which is a random number added at the beginning of the password, all this string will be saved in the database, achieving a very high level of security.
+We have a role system, which defines if a user is an Administrator or a normal User, and depending on that he will have one or other options enabled, such as a CRUD of products or users, to avoid a scale of privileges we have made it impossible to be Admin, it always inserts users as User and we have a couple of Administrators created by default.
+
+=== Additional libraries
+Dependencies in the backend:
+
+- https://www.npmjs.com/package/axios[_"axios"_]: "^0.26.1"
+
+- https://www.npmjs.com/package/cloudinary[_"cloudinary"_]: "^1.28.1"
+
+- https://www.npmjs.com/package/cors[_"cors"_]: "^2.8.5"
+
+- https://www.npmjs.com/package/crypto-js[_"crypto"_]: "^1.0.1"
+
+- https://www.npmjs.com/package/dotenv[_"dotenv"_]: "^16.0.0"
+
+- https://www.npmjs.com/package/express[_"express"_]: "^4.17.2"
+
+- https://www.npmjs.com/package/express-prom-bundle[_"express-prom-bundle"_]:"^6.4.1"
+
+- https://www.npmjs.com/package/express-validator[_"express-validator"_]: "^6.14.0"
+
+- https://www.npmjs.com/package/jsonwebtoken[_"jsonwebtoken"_]: "^8.5.1"
+
+- https://www.npmjs.com/package/mongodb[_"mongodb"_]: "^3.7.3"
+
+- https://www.npmjs.com/package/@inrupt/solid-client[_"@inrupt/solid-client"_]: "^1.19.0"
+
+- https://www.npmjs.com/package/@inrupt/vocab-common-rdf[_"@inrupt/vocab-common-rdf"_]: "^1.0.3"
+
+- https://www.npmjs.com/package/parcel-bundler[_"parcel-bundler"_]: "^1.12.5"
+
+- https://www.npmjs.com/package/prom-client[_"prom-client"_]: "^14.0.1"
+
+- https://www.npmjs.com/package/reflect-metadata[_"reflect-metadata"_]: "^0.1.13"
+
+- https://www.npmjs.com/package/typeorm[_"typeorm"_]: "^0.2.44"
+
+- https://www.npmjs.com/package/uuid[_"uuid"_]: "^8.3.2"
+
+Dependencies in FrontEnd
+
+- @emotion/react: ^11.7.1,
+
+- @emotion/styled: ^11.6.0
+- @inrupt/lit-generated-vocab-common: ^0.3.11
+- @inrupt/solid-client": ^1.19.0
+- @inrupt/solid-client-authn-browser: ^1.11.6
+- @inrupt/solid-ui-react: ^2.7.0
+- @inrupt/vocab-common-rdf": ^1.0.3
+- @material-ui/icons: ^4.11.2
+- @material-ui/lab: ^4.0.0-alpha.58
+- "@material-ui/styles: ^4.11.4
+- @mui/core: ^5.0.0-alpha.54
+- @mui/icons-material: ^5.2.5
+- @mui/material: ^5.2.5
+- @testing-library/jest-dom: ^5.16.1
+- @testing-library/react: ^12.1.2
+- @testing-library/user-event: ^13.5.0,
+- @types/node": ^16.11.14,
+- @types/react": ^17.0.37,
+- @types/react-dom: ^17.0.11,
+- bootstrap: ^5.1.3,
+- bootswatch: ^5.1.3,
+- cors: ^2.8.5,
+- jsonwebtoken: ^8.5.1,
+- node-sass: ^7.0.1,
+- react: ^17.0.2,
+- react-bootstrap: ^2.2.0,
+- react-dom: ^17.0.2
+- react-material-ui-carousel: ^3.3.3
+- react-router: ^6.2.2,
+- react-router-dom: ^6.2.2
+- sass: ^1.50.1,
+- serve": ^13.0.2,
+- sweetalert2: ^11.4.8,
+- typescript: ^4.5.4
+- web-vitals: ^2.1.2
+
+=== Archiutecture and design patterns
+
+==== Hexagonal architecture
+
+We are using hexagonal architecture in our app. We took this decision because it presents several advantadges.
+
+The hexagonal architecture is an architectural pattern used in software design. It divides a system into different layers or regions with their own responsibility. In this way, it manages to decouple layers of our application, allowing them to evolve in isolation. In addition, having the system separated by responsibilities will facilitate reuse. The components are loosely-coupled and interchangeable, such as the application core, the database, the user interface, test scripts and interfaces with other systems.
+
+Hexagonal architecture is an alternative to traditional layered architecture.
+
+image:08_Hexagonal.png["Hexagonal"]
+
+==== Microservices
+
+In our application we decided to use microservices to divide the application into webapp, restapi, database and data. With this we achieve a low coupling in these layers, a better control over them and an improvement in the quality of the software. To achieve this decoupling, we use docker, to build the images of each service.
+
+=== Code Quality standards
+
+Code quality standars allows us to make an understable, maintainable and reusable code for future revisions and changes. Code should always have a correct structure to be easily understandable.
+
+To achieve this we will use all tools programs give us and make correct decisions like design patters, use convention naming and try to reduce technical debt.
+
+=== Testability
+
+Applications should be strongly tested. We use user stories to make acceptance tests and unit test to test the rest of the application components and states during running process.
+We think this is the best way to be sure the project works correctly.
+
+==== Postman
+To test our code, Postman was used in the backend during the whole development of the work, to check if the requests were being carried out correctly. Postman is an application in which we can test requests and obtain a successfully respond if everything is ok. 
+
+==== Unit tests
+Later, once we had a more or less solid project, we added a series of unit tests, which use Jest technology, these tests try to include all the backend and frontend parts, but separately, without joining them. 
+
+==== Integration tests
+Once unit tests passed successfully, integration tests were implemented, which test the union of frontend and backend, all these tests were done exhaustively and were performed by people who had not done that part of the code, with that we get that we do not test things that are known to work.
+
+==== Load tests
+We have load tests to check our application under real-life load conditions, it gives us an idea of the respond time having a determined users load.
+
+===== Get products (catalog)
+3 users in 15 seconds
+image:08_loadtests_getproducts3-15.png["Load test - Catalog 1"]
+15 users in 30 seconds
+image:08_loadtests_getproducts15-30.png["Load test - Catalog 2"]
+
+===== Login
+15 users in 60 seconds
+image:08_loadtests_login15-60.png["Load test - Login 1"]
+5000 users in 60 seconds. We can check that 5000 users in 1 minute is too much and some petitions fail. Most of the responds are slower but don't fail.
+image:08_loadtests_login5000-60.png["Load test - Login 2"]
+
+
+===== Get users list
+This load test implicates a login as admin before listing users.
+image:08_loadtests_getuserslist3-15.png["Load test - Get users 1"]
+
+

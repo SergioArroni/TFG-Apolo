@@ -1,0 +1,68 @@
+/*Especificidad: 001*/
+body {
+  background-color: rgb(188,231,132);
+  color: rgb(0, 0, 0);
+}
+/*Especificidad: 001*/
+h1 {
+  text-align: center;
+}
+/*Especificidad: 001*/
+fieldset{
+  display: grid;
+  margin-right: 5em;
+  width: 28.5em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  border-radius: 0.5em;
+  grid-template-columns: auto auto auto auto auto;
+}
+/*Especificidad: 001*/
+form {
+  background-color: rgb(44, 42, 42);
+  margin-left: 5em;
+  width: 30em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  border-radius: 0.5em;
+  display: grid;
+  grid-template-columns: auto;
+}
+/*Especificidad: 011*/
+input[type='submit'] {
+  border-radius: 0.5em;
+  height: 2.5em;
+  width: 3em;
+  margin: 0.6em;
+}
+/*Especificidad: 011*/
+input[value='mrc'],
+input[value='mr+'],
+input[value='mr-'] {
+  background-color: rgb(100, 100, 109);
+  color: white;
+}
+/*Especificidad: 011*/
+input[value='/'],
+input[value='*'],
+input[value='+'],
+input[value='-'] {
+  background-color: rgb(223, 49, 49);
+}
+/*Especificidad: 001*/
+label {
+  color: white;
+}
+/*Especificidad: 001*/
+textarea {
+  display: block;
+  text-align: center;
+  margin-right: 5em;
+  height: 5em;
+  width: 35em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  border-radius: 0.5em;
+  background-color: #fff;
+  resize: none;
+}

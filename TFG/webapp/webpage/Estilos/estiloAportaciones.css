@@ -1,0 +1,7 @@
+@import "estilo.css";
+
+/*Especificidad: 001
+section {
+  display: flex;
+  flex-direction: row;
+}

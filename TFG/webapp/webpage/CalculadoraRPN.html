@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width" />
+    <meta name="author" content="Sergio Arroni del Riego" />
+    <meta name="description" content="Calculadora web RPN" />
+    <meta name="keywords" content="Calculadora,Web,RPN, Cueva, Notacion, Polaca, Inversa" />
+    <title>Calculadora RPN</title>
+    <link rel="stylesheet" type="text/css" href="CalculadoraRPN.css" />
+    <script src="CalculadoraRPN.js"></script>
+
+</head>
+<body>
+
+    <header>
+        <h1> Grace Murray Hopper </h1>
+          <nav class="menu">
+            <ul>
+              <li><a id="index" href="index.html">Vida y obra</a></li>
+              <li><a id="aportaciones" href="aportaciones.html">Aportaciones</a></li>
+              <li><a id="campos" href="campos.html">Campos de estudio</a></li>
+              <li><a id="cuestionario" href="cuestionario.html">Cuestionario</a></li>
+              <li><a id="CalculadoraBasica" href="CalculadoraBasica.html">CalculadoraBasica</a></li>
+              <li><a id="CalculadoraCientifica" href="CalculadoraCientifica.html">CalculadoraCientifica</a></li>
+              <li><a id="CalculadoraRPN" href="CalculadoraRPN.html">CalculadoraRPN</a></li>
+            </ul>
+          </nav>
+      </header>
+    <main>
+        
+        <form>
+            <fieldset>
+                <input type="submit" value="Reset" />
+            </fieldset>
+
+            <label for="resultado">Pila de la calculadora RPN</label>
+            <textarea name="resultado" id="resultado" readonly></textarea>
+            
+          <fieldset> 
+
+            <input type="button" value="sin" onclick="calculadora.sin()" />
+            <input type="button" value="cos" onclick="calculadora.cos()" />
+            <input type="button" value="tan" onclick="calculadora.tan()" />
+            <input type="button" value="10^x" onclick="calculadora.base10()" />
+            <input type="button" value="Mod" onclick="calculadora.mod()" />
+            
+            <input type="button" value="sqrt" onclick="calculadora.sqrt()" />
+            <input type="button" value="x^2" onclick="calculadora.cuadrado()" />
+            <input type="button" value="x^y" onclick="calculadora.pow()" />
+            <input type="button" value="log" onclick="calculadora.log()" />
+            <input type="button" value="/" onclick="calculadora.div()" />
+            
+            <input type="button" value="C" onclick="calculadora.clear()" />
+            <input type="button" value="7" onclick="calculadora.add(7)" />
+            <input type="button" value="8" onclick="calculadora.add(8)" />
+            <input type="button" value="9" onclick="calculadora.add(9)" />
+            <input type="button" value="*" onclick="calculadora.mul()" />
+            
+            <input type="button" value="del" onclick="calculadora.delete()" />
+            <input type="button" value="4" onclick="calculadora.add(4)" />
+            <input type="button" value="5" onclick="calculadora.add(5)" />
+            <input type="button" value="6" onclick="calculadora.add(6)" />
+            <input type="button" value="-" onclick="calculadora.resta()" />
+            
+            <input type="button" value="n!" onclick="calculadora.factorial()" />
+            <input type="button" value="1" onclick="calculadora.add(1)" />
+            <input type="button" value="2" onclick="calculadora.add(2)" />
+            <input type="button" value="3" onclick="calculadora.add(3)" />
+            <input type="button" value="+" onclick="calculadora.sum()" />
+            
+            <input type="button" value="+-" onclick="calculadora.masmenos()" />
+            <input type="button" value="pi" onclick="calculadora.pi()" />
+            <input type="button" value="0" onclick="calculadora.add(0)" />
+            <input type="button" value="." onclick="calculadora.punto()" />
+            <input type="button" value="Enter" onclick="calculadora.enter()" />
+                  
+          </fieldset>
+        </form>
+    </main>
+</body>
+</html>

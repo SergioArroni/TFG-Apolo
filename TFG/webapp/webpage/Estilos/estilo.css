@@ -1,0 +1,175 @@
+/*Especificidad: 001*/
+body {
+  font-family: 'Times New Roman', Times, serif;
+  color: #242424;
+  background-color: #9FB3CB;
+  line-height: 1.5;
+  font-size: 1.5em;  
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  }
+/*Especificidad: 001*/
+header{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  }
+/*Especificidad: 001*/
+main{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  }
+/*Especificidad: 001*/
+footer{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+  }
+/*Especificidad: 001*/
+section{
+display: flex;
+justify-content: center;
+flex-direction: column;
+}
+/*Especificidad: 001*/
+h1, h2, h3, h4 { 
+  text-transform: uppercase;
+  padding: 1.2em; 
+  text-align: center; 
+  }
+/*Especificidad: 001*/
+h1{
+font-size: 1.5em; 
+  }
+/*Especificidad: 001*/
+h2{
+font-size: 1.2em;   
+}
+/*Especificidad: 001*/
+h3,h4{
+font-size: 1em;   
+}
+
+/* Style the top navigation bar */
+nav {
+display: flex;
+justify-content: center;
+background-color: #333;
+padding: 0.2em; 
+text-align: center;
+font-size: 1em;
+}
+
+/* Style the navigation bar links */
+nav a {
+color: white;
+text-align: center;
+padding: 0.8em; 
+}
+
+/* Change color on hover */
+nav a:hover {
+background-color: #ddd;
+color: black;
+}
+@media screen and (max-width: 50em) {
+  nav {   
+    flex-direction: column;
+  }
+}
+
+/*Especificidad: 001
+nav{
+  text-transform: uppercase;
+  padding: 1.2em; 
+  text-align: center;
+  font-size: 1.2em;
+  background-color: #BEF4DB;
+  overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 5em;
+  display: flex;
+  }
+/*Especificidad: 002
+nav a{
+    padding: 1.2em; 
+    color:#474747;
+    text-align: center;
+}
+/*Especificidad: 012
+nav a:hover{
+background-color: #35D48D;
+color: #2E2E2E;
+}
+/*Especificidad: 001*/
+video{
+max-width: 100%;
+height: auto;
+}
+/*Especificidad: 001*/
+img{
+width: auto; 
+height: auto;
+min-width: 10%;
+max-width: 30%;
+}
+/*Especificidad: 002*/
+footer img{
+max-width: 40%;
+}
+/*Especificidad: 001*/
+figure{
+display: flex;
+justify-content: center;
+flex-direction: row;
+}
+/*Especificidad: 002*/
+form>input{
+  box-sizing: border-box;
+  height: 2.5em;
+  width: 20em;
+}
+/*Especificidad: 002*/
+form>fieldset , form>textarea{
+  box-sizing: border-box;
+  height: auto;
+  width: auto;
+  max-width: 50%;
+}
+/*Especificidad: 011*/
+input:focus,textarea:focus  {
+  background-color: lightblue;
+}
+/*Especificidad: 001*/
+label,legend{
+  line-height: 4em;
+}
+/*Especificidad: 001*/
+form{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+/*Especificidad: 001*/
+td, th {
+  width: 4em;
+  height: 2em;
+  text-align: center;
+}
+/*Especificidad: 001*/
+th {
+  background: lightblue;
+}
+/*Especificidad: 012*/
+table tr:hover {
+  background-color: #ddd;
+}
+/*Especificidad: 001*/
+caption{
+  padding: 1.2em; 
+  text-align: center; 
+  font-size: 1em;  
+}

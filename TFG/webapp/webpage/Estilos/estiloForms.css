@@ -1,0 +1,35 @@
+/*Especificidad: 002*/
+form>input{
+  box-sizing: border-box;
+  height: 2.5em;
+  width: 20em;
+  border: 0.2em solid #39c;
+}
+/*Especificidad: 002*/
+form>fieldset , form>textarea{
+  box-sizing: border-box;
+  border: 0.2em solid #026786;
+  height: auto;
+  width: auto;
+  max-width: 50%;
+}
+/*Especificidad: 011*/
+input:focus,textarea:focus  {
+  background-color: lightblue;
+}
+/*Especificidad: 001*/
+label,legend{
+  line-height: 4em;
+}
+/*Especificidad: 001*/
+form{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+/*Especificidad: 001*/
+caption{
+  padding: 1.2em; 
+  text-align: center; 
+  font-size: 1em;  
+}

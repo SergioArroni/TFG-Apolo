@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="Sergio Arroni,Software y estándares en la Web, Universidad de Oviedo, Calculadora, Cientifica" />
+    <meta name="Autor" content="Sergio Arroni del Riego" />
+    <meta name="Descripción" content="Se trata de una web en la cual hay una calculadora Cientifica" />
+    <meta name ="viewport" content ="width=device-width, initial scale=1.0" />
+    <title>Calculadora Cientifica</title>
+    <link rel="stylesheet" type="text/css" href="CalculadoraCientifica.css" />
+    <script src="CalculadoraCientifica.js"></script>
+  </head>
+  <body>
+    
+    <header>
+      <h1> Grace Murray Hopper </h1>
+        <nav class="menu">
+          <ul>
+            <li><a id="index" href="index.html">Vida y obra</a></li>
+            <li><a id="aportaciones" href="aportaciones.html">Aportaciones</a></li>
+            <li><a id="campos" href="campos.html">Campos de estudio</a></li>
+            <li><a id="cuestionario" href="cuestionario.html">Cuestionario</a></li>
+            <li><a id="CalculadoraBasica" href="CalculadoraBasica.html">CalculadoraBasica</a></li>
+            <li><a id="CalculadoraCientifica" href="CalculadoraCientifica.html">CalculadoraCientifica</a></li>
+            <li><a id="CalculadoraRPN" href="CalculadoraRPN.html">CalculadoraRPN</a></li>
+          </ul>
+        </nav>
+    </header>
+    <main>
+      
+      <form>
+        <fieldset>
+          <input type="submit" value="Reset" />
+        </fieldset>
+
+        <label for="pantalla">Casio</label>
+        <input type="text" id="pantalla" name="pantalla" disabled />
+
+        <fieldset>
+          <input type="button" value="DEG" onclick="calculadora.deg()" />
+          <input type="button" value="HYP" onclick="calculadora.hyp()" />
+          <input type="button" value="F-E" onclick="calculadora.fe()" />
+        </fieldset>
+        
+        <fieldset>
+          <input type="button" value="MC" onclick="calculadora.mclear()" />
+          <input type="button" value="MR" onclick="calculadora.mshow()" />
+          <input type="button" value="M+" onclick="calculadora.madd()" />
+          <input type="button" value="M-" onclick="calculadora.mres()" />
+          <input type="button" value="MS" onclick="calculadora.ms()" />
+        </fieldset>
+        <fieldset>
+          
+          <input type="button" value="x^2" onclick="calculadora.cuadrado()" />
+          <input type="button" value="x^y" onclick="calculadora.pow()" />
+          <input type="button" value="sin" onclick="calculadora.sin()" />
+          <input type="button" value="cos" onclick="calculadora.cos()" />
+          <input type="button" value="tan" onclick="calculadora.tan()" />
+          
+          <input type="button" value="sqrt" onclick="calculadora.sqrt()" />
+          <input type="button" value="10^x" onclick="calculadora.potencia10()" />
+          <input type="button" value="log" onclick="calculadora.log()" />
+          <input type="button" value="Exp" onclick="calculadora.exp1()" />
+          <input type="button" value="Mod" onclick="calculadora.mod()" />
+          
+          <input type="button" value="shift" onclick="calculadora.shift()" />
+          <input type="button" value="CE" onclick="calculadora.ce()" />
+          <input type="button" value="C" onclick="calculadora.clear()" />
+          <input type="button" value="del" onclick="calculadora.delete()" />
+          <input type="button" value="/" onclick="calculadora.div()" />
+          
+          <input type="button" value="pi" onclick="calculadora.pi()" />
+          <input type="button" value="7" onclick="calculadora.add(7)" />
+          <input type="button" value="8" onclick="calculadora.add(8)" />
+          <input type="button" value="9" onclick="calculadora.add(9)" />
+          <input type="button" value="*" onclick="calculadora.mul()" />
+          
+          <input type="button" value="n!" onclick="calculadora.factorial()" />
+          <input type="button" value="4" onclick="calculadora.add(4)" />
+          <input type="button" value="5" onclick="calculadora.add(5)" />
+          <input type="button" value="6" onclick="calculadora.add(6)" />
+          <input type="button" value="-" onclick="calculadora.resta()" />
+          
+          <input type="button" value="+-" onclick="calculadora.masmenos()" />
+          <input type="button" value="1" onclick="calculadora.add(1)" />
+          <input type="button" value="2" onclick="calculadora.add(2)" />
+          <input type="button" value="3" onclick="calculadora.add(3)" />
+          <input type="button" value="+" onclick="calculadora.suma()" />
+                
+          <input type="button" value="(" onclick="calculadora.abrirparentesis()" />
+          <input type="button" value=")" onclick="calculadora.cerrarparentesis()" />
+          <input type="button" value="0" onclick="calculadora.add(0)" />
+          <input type="button" value="." onclick="calculadora.punto()" />
+          <input type="button" value="=" onclick="calculadora.solve()" />
+                
+        </fieldset>
+       </form>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,61 @@
+== Risks and Technical Debts
+
+=== Risks
+This is the compilation of the identified risks ordered by priority that we must minimize or avoid.
+
+* Not having knowledge of the following technologies:
+
+[options="header",cols="1,1"]
+|===
+|Technology| Risk
+| SOLID| We may have difficulty following SOLID principles as we have not worked on a SOLID project before and handling decentralized data may be difficult.
+| PODs| We don't have any knowledge about PODs prior to this project, so we need to learn how to keep user information secure and private, which can take considerable time.
+| React| We have never used it, so we must learn during the project.
+| MongoDB| We may run into difficulties using a NoSQL database, as we have experience only using SQL databases, which can cause delays while we learn how to use it.
+| Grafana and Prometeus| We have never used these tools to monitor a project and we need to adapt to them.
+| Postman| We have never used this testing tool.
+| Node.js|We don't know how to use it.
+| AWS| It costs time to adapt to it due to we have never used it.
+| Docker| We have to learn how to use it.
+| Express| We may have some dificulties, we need to learn about it.
+| Bootstrap| We have to learn about this style library. It will cost some time.
+| TypeScript| Some members of the group have some knowledge of JavaScript, and since TypeScript is similar to JavaScript, it won't be too difficult to adapt, although it will take time to learn this language.
+|Git| We have little knowledge about using Git, so we can easily go wrong.
+| Gatling | We use it to do load test. We had no idea about this tool.
+|===
+
+* Other risks:
+
+[options="header",cols="1,1"]
+|===
+|Risk|Explanation
+|Abandonment of a member| If a member leaves the group, it would mean redistributing the work, suddenly having more workload for the members who remain. 
+|Being just 4 members| It can be more difficult to develop this application being only 4 due to other groups have 5 or even 6 members to do the same work.
+|===
+
+
+==== Minimize or avoid risks
+
+[options="header",cols="1,1"]
+|===
+|Risk|How to avoid or minimize
+|Not knowing the technologies|We seek information and practice using them.
+|Posibility of a team member leaving|We will have good communication and help each other.
+|Being only 4 members| We have to do a hard work to develop the application.
+|===
+
+
+
+=== Technical debts
+
+* Even if the app is internationalized, we could't find a way of automatic translation because of the time and complication of the task. A lot of APIs aren't free and require a laborious configuration that could pottentialy give us some problems we hadn't time to resolve. 
+* The SOLID Login is implementated and made. But because of our deployment choice we had problems with the https certificate. We had no time to fix it before the last release. Instead, we decided to use the public address on the VCARD od the SOLID POD.
+* We had intention to complete some optional exercises (pick up points, delivery stimation, and delivery services) but we had no time to do them before the last release.
+* We could not add checkboxes on the shopping cart because we were busy doing other mandatory tasks. at the end we could not complete it
+* We wanted to incorporate a drag and drop component so the admin could update a picture of a new product by dragging it to the field but, again, we were concenrated in completing the mandatory tasks
+* SOLID in the deployment is no posible due to SOLID needs HTTPS requests and AWS no allows to do HTTPS. 
+* In the deployment, the database could not be seeded because we need to make the package public and we do not have permissions.
+* We would like to have improved the selector to choose the amount of product to add to the cart because when there is a lot of stock, the combobox is huge.
+* Redirect from order placed to my orders.
+* We wanted not not to load the entire catalog directly, but load a few items and add a "see more" button to show more.
+* There are pages and front-end components that are coupled because they have components that render together. Would have to undock to get more coverage.
