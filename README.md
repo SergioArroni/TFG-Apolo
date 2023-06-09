@@ -12,7 +12,7 @@ Diseño de un sistema inteligente que, mediante el uso de técnicas de Machine L
 * **Tutor:** Antonio Payá González
 * **Tutor:** Vicente García Díaz
 
-![Apolo](documentation/memory/Figures/Apolo.png)
+![Apolo](TFG/documentation/memory/Figures/Apolo.png)
 
 ## Estrucutra del proyecto
 
@@ -54,7 +54,7 @@ pdflatex main.tex
 Para la demo que se utilizará en el Trabajo de Fin de Grado, de ha desarrollado un entorno que simula una red de ordenadores conectados a través de una red local. Este entorno se encuentra en el directorio `environment` y se ha desarrollado mediante el uso de Docker y Docker-Compose. Para poder utilizar el entorno, primero es necesario asegurarse de tener instalado Docker y Docker-Compose en su ordenador. Una vez que se tiene instalado Docker y Docker-Compose, se puede utilizar el siguiente comando desde la línea de comandos para levantar el entorno:
 
 ```bash
-docker-compose up -d
+docker-compose up -d --build
 ```
 
 ## Research Source Code
