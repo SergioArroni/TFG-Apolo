@@ -14,7 +14,7 @@ class "ApoloTrainer" as ids.apolo.model_train.apolo_trainer.ApoloTrainer {
   test_model(df_preprocessed: object, url: str) -> None
   train_model(X_train: list, y_train: list, X_test: list, y_test: list, url: str) -> None
 }
-class "ClearData" as ids.apolo.preprocesing.clear_data.ClearData {
+interface "ClearData" as ids.apolo.preprocesing.clear_data.ClearData {
   df : NoneType, DataFrame
   do_log : bool
   label_f : int
@@ -140,7 +140,7 @@ class "MAB" as ids.apolo.layers.mab.mab_model.MAB {
 class "MLP" as ids.apolo.layers.models.all_models.mlp.MLP {
   expecific_model() -> object
 }
-class "Model" as ids.apolo.layers.models.model.Model {
+interface "Model" as ids.apolo.layers.models.model.Model {
   dataset : str
   model_trained : object
   predictions : list
