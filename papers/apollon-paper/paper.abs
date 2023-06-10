@@ -1,0 +1,13 @@
+The rise of Adversarial Machine Learning (AML) attacks is presenting a significant challenge to Intrusion Detection
+        Systems (IDS) and their ability to detect threats.
+        To address this issue, we introduce \textit{Apollon}, a novel defence system that can protect IDS against AML
+        attacks.
+        \textit{Apollon} utilizes a diverse set of classifiers to identify intrusions and employs
+        \textit{Multi-Armed Bandits (MAB)} with \textit{Thompson sampling} to dynamically select the optimal classifier or
+        ensemble of classifiers for each input.
+        This approach enables \textit{Apollon} to prevent attackers from learning the IDS behaviour and generating
+        adversarial examples that can evade the IDS detection.
+        We evaluate \textit{Apollon} on several of the most popular and recent datasets, and show that it can successfully
+        detect attacks without compromising its performance on traditional network traffic.
+        Our results suggest that \textit{Apollon} is a robust defence system against AML attacks in IDS.
+    
