@@ -13,6 +13,8 @@ from apolo.layers.models import (
     NaiveBayes,
     LogisticRegressionModel,
     MLP,
+    SVCModel,
+    KNeighborns
 )
 
 
@@ -46,6 +48,8 @@ class ApoloTrainer:
             NaiveBayes(seed=self.seed, exe=False).expecific_model(),
             LogisticRegressionModel(seed=self.seed, exe=False).expecific_model(),
             MLP(seed=self.seed, exe=False).expecific_model(),
+            SVCModel(seed=self.seed, exe=False).expecific_model(),
+            KNeighborns(seed=self.seed, exe=False).expecific_model(),
         ]
         self.mab = MAB(arms=arms, n_clusters=2)
 

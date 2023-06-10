@@ -51,9 +51,7 @@ class DataSelector:
         self.seed = seed
         self.usl: UtilsLoad = UtilsLoad()
         self.list_load_dataset = [
-            "apolo/preprocesing/data/CIC_2017/Thursday-WorkingHours-Afternoon-Infilteration.pcap_ISCX.csv",
-            "apolo/preprocesing/data/CIC_2017/Thursday-WorkingHours-Morning-WebAttacks.pcap_ISCX.csv",
-            "apolo/preprocesing/data/CIC_2017/Tuesday-WorkingHours.pcap_ISCX.csv",
+            "apolo/preprocesing/data/data_our/Data_Our.csv",
         ]
 
     def load_dataset(
@@ -203,6 +201,8 @@ class DataSelector:
         Output:
             object
         """
+        
+        print(list_load_request)
 
         list_load_request = json.loads([l.decode("utf-8") for l in list_load_request][0])
 

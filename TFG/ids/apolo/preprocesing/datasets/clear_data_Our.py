@@ -50,20 +50,42 @@ class ClearDataOur(ClearData):
         Output:
             None
         """
-
+        
+        print(self.df.columns)
+        if "Flow ID" in self.df.columns:
+            self.df.drop(["Flow ID"], axis=1, inplace=True)
+            
+        if "Src IP" in self.df.columns:
+            self.df.drop(["Src IP"], axis=1, inplace=True)
+            
+        if "Dst IP" in self.df.columns:
+            self.df.drop(["Dst IP"], axis=1, inplace=True)
+            
+        if "Timestamp" in self.df.columns:
+            self.df.drop(["Timestamp"], axis=1, inplace=True)
+            
         self.drop_duplicate_columns()
 
         self.drop_bad_elements()
+        
+        print(self.df.columns)
 
         self.x = self.df.drop(["Label"], axis=1)
         self.y = self.df["Label"]
+        
+        # replace No Label with 0
+        self.y = self.y.replace("No Label", 2)
 
         labels = set(self.y)
 
-        # replace labels for 0
-        self.y = self.y.replace("No Label", 0)
-        
         print(f"labels: {labels}")
+        
+        print(self.x)
+        
+        #cast to float
+        self.x["Src Port"] = self.x["Src Port"].astype(float)
+        self.x["Dst Port"] = self.x["Dst Port"].astype(float)
+        self.x["Protocol"] = self.x["Protocol"].astype(float)
 
         self.drop_bad_elements_x()
 
@@ -74,10 +96,10 @@ class ClearDataOur(ClearData):
     # Override
     def save_data(self):
         aux_df = self.df
-        aux_df.drop([" Label"], axis=1, inplace=True)
+        aux_df.drop(["Label"], axis=1, inplace=True)
 
         if self.y is not None:
-            aux_y = pd.DataFrame(self.y, columns=[" Label"])
+            aux_y = pd.DataFrame(self.y, columns=["Label"])
             aux_y.to_csv(
                 f"apolo/preprocesing/data/save/data_our/{self.name_save}_y.csv",
                 index=False,
@@ -88,3 +110,9 @@ class ClearDataOur(ClearData):
         aux_df.to_csv(
             f"apolo/preprocesing/data/save/data_our/{self.name_save}.csv", index=False
         )
+    
+    def load_data(self):
+        df = pd.read_csv(f"apolo/preprocesing/data/save/data_our/{self.name_load}.csv")
+        y = pd.read_csv(f"apolo/preprocesing/data/save/data_our/{self.name_load}_y.csv")
+
+        return df, y

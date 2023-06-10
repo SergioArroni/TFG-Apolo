@@ -60,12 +60,17 @@ class ScoreManager:
         # Add the last element of the Redis list to the InfluxDB database
         print("InfluxDB connection established")
 
-        value = self.apolo_predict.classify_request(
+        value, arms = self.apolo_predict.classify_request(
             list_load_request=last_element, url="/app/apolo/saved_apolo/Apolo"
         )
+        value = value[0]
+        arms = arms[0]
+        print("Value: " + str(value))
+        print("Arms: " + str(arms))
 
         element = last_element[0].decode("utf-8")
         element_obj = json.loads(element)
+        
         self.ixs.add_influxdb_data(
             influxdb_connection=influxdb_connection,
             bucket="requests_scores",
@@ -75,8 +80,7 @@ class ScoreManager:
         )
 
         print(
-            "Last element of the Redis list added to the InfluxDB database, with value: "
-            + str(value)
+            f"Last element of the Redis list added to the InfluxDB database, with value: {str(value)} and arms: {str(arms)}"
         )
 
         # Close the InfluxDB connection
