@@ -160,21 +160,10 @@ class DataSelector:
         Output:
             Transform object
         """
-        
-        print("bbb")
-
-        print(df.head())
-        print(df.columns)
 
         data: ClearData = datasets_types[dataset_type](
             df=df, do_save=save, seed=seed, name_save=name_save, name_load=name_load
         )
-        
-        print("ccc")
-
-        print(df.head())
-        print(df.columns)
-
 
         print("Loading new data")
         data.clear_data()
